@@ -1,0 +1,124 @@
+﻿
+@using Qlud.KTTTNCN.Web.Areas.App.Models.Common.Modals
+@using Qlud.KTTTNCN.Web.Areas.App.Models.ChungTuKTTs
+@model ChungTuKTTViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ChungTuKTTInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("HoTen") :</h6>
+                @Model.ChungTuKTT.HoTen
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("MaSoThue") :</h6>
+                @Model.ChungTuKTT.MaSoThue
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DiaChi") :</h6>
+                @Model.ChungTuKTT.DiaChi
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("QuocTich") :</h6>
+                @Model.ChungTuKTT.QuocTich
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CuTru") :</h6>
+                @Model.ChungTuKTT.CuTru
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CCCD") :</h6>
+                @Model.ChungTuKTT.CCCD
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("NoiCap") :</h6>
+                @Model.ChungTuKTT.NoiCap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("NgayCap") :</h6>
+                @Model.ChungTuKTT.NgayCap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("KhoanThuNhap") :</h6>
+                @Model.ChungTuKTT.KhoanThuNhap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BaoHiemBatBuoc") :</h6>
+                @Model.ChungTuKTT.BaoHiemBatBuoc
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ThoiDiemTraThuNhapThang") :</h6>
+                @Model.ChungTuKTT.ThoiDiemTraThuNhapThang
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ThoiDiemTraThuNhapNam") :</h6>
+                @Model.ChungTuKTT.ThoiDiemTraThuNhapNam
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TongThuNhapChiuThue") :</h6>
+                @Model.ChungTuKTT.TongThuNhapChiuThue
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TongThuNhapTinhThue") :</h6>
+                @Model.ChungTuKTT.TongThuNhapTinhThue
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SoThueTNCNDaKhauTru") :</h6>
+                @Model.ChungTuKTT.SoThueTNCNDaKhauTru
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SoThuNhapDuocNhan") :</h6>
+                @Model.ChungTuKTT.SoThuNhapDuocNhan
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("KhoanDongGop") :</h6>
+                @Model.ChungTuKTT.KhoanDongGop
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Email") :</h6>
+                @Model.ChungTuKTT.Email
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ThoiGianNhap") :</h6>
+                @Model.ChungTuKTT.ThoiGianNhap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ThoiGianDuyet") :</h6>
+                @Model.ChungTuKTT.ThoiGianDuyet
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("UserNhap") :</h6>
+                @Model.ChungTuKTT.UserNhap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("UserDuyet") :</h6>
+                @Model.ChungTuKTT.UserDuyet
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TrangThai") :</h6>
+                @Model.ChungTuKTT.TrangThai
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("MauSo") :</h6>
+                @Model.ChungTuKTT.MauSo
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("KyHieu") :</h6>
+                @Model.ChungTuKTT.KyHieu
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SoChungTu") :</h6>
+                @Model.ChungTuKTT.SoChungTu
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

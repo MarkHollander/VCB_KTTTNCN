@@ -1,0 +1,157 @@
+﻿
+@using System.Globalization
+@using Qlud.KTTTNCN.Web.Areas.App.Models.Common.Modals
+@using Qlud.KTTTNCN.Web.Areas.App.Models.ChungTuKTTs
+@model CreateOrEditChungTuKTTModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditChungTuKTT")) : L("CreateNewChungTuKTT")))
+
+<div class="modal-body">
+        <div id="ChungTuKTTInformationsTab">
+            <form name="ChungTuKTTInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ChungTuKTT.Id" />
+                }
+
+				
+                
+				
+                
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_HoTen">@L("HoTen")</label>
+									<input class="form-control" id="ChungTuKTT_HoTen" value="@Model.ChungTuKTT.HoTen" type="text" name="hoTen"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxHoTenLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinHoTenLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_MaSoThue">@L("MaSoThue")</label>
+									<input class="form-control" id="ChungTuKTT_MaSoThue" value="@Model.ChungTuKTT.MaSoThue" type="text" name="maSoThue"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxMaSoThueLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinMaSoThueLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_DiaChi">@L("DiaChi")</label>
+									<input class="form-control" id="ChungTuKTT_DiaChi" value="@Model.ChungTuKTT.DiaChi" type="text" name="diaChi"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxDiaChiLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinDiaChiLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_QuocTich">@L("QuocTich")</label>
+									<input class="form-control" id="ChungTuKTT_QuocTich" value="@Model.ChungTuKTT.QuocTich" type="text" name="quocTich"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxQuocTichLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinQuocTichLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_CuTru">@L("CuTru")</label>
+									<input class="form-control" id="ChungTuKTT_CuTru" value="@Model.ChungTuKTT.CuTru" type="text" name="cuTru"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxCuTruLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinCuTruLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_CCCD">@L("CCCD")</label>
+									<input class="form-control" id="ChungTuKTT_CCCD" value="@Model.ChungTuKTT.CCCD" type="text" name="cccd"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxCCCDLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinCCCDLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_NoiCap">@L("NoiCap")</label>
+									<input class="form-control" id="ChungTuKTT_NoiCap" value="@Model.ChungTuKTT.NoiCap" type="text" name="noiCap"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxNoiCapLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinNoiCapLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_NgayCap">@L("NgayCap")</label>
+									<input class="form-control m-input date-picker" id="ChungTuKTT_NgayCap" type="text" name="ngayCap" value="@Model.ChungTuKTT.NgayCap"/>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_KhoanThuNhap">@L("KhoanThuNhap")</label>
+									<input class="form-control m-input" id="ChungTuKTT_KhoanThuNhap" value="@Model.ChungTuKTT.KhoanThuNhap.ToString(CultureInfo.InvariantCulture)" type="number" name="khoanThuNhap"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_BaoHiemBatBuoc">@L("BaoHiemBatBuoc")</label>
+									<input class="form-control" id="ChungTuKTT_BaoHiemBatBuoc" value="@Model.ChungTuKTT.BaoHiemBatBuoc" type="text" name="baoHiemBatBuoc"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxBaoHiemBatBuocLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinBaoHiemBatBuocLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_ThoiDiemTraThuNhapThang">@L("ThoiDiemTraThuNhapThang")</label>
+									<input class="form-control" id="ChungTuKTT_ThoiDiemTraThuNhapThang" value="@Model.ChungTuKTT.ThoiDiemTraThuNhapThang" type="text" name="thoiDiemTraThuNhapThang"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxThoiDiemTraThuNhapThangLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinThoiDiemTraThuNhapThangLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_ThoiDiemTraThuNhapNam">@L("ThoiDiemTraThuNhapNam")</label>
+									<input class="form-control" id="ChungTuKTT_ThoiDiemTraThuNhapNam" value="@Model.ChungTuKTT.ThoiDiemTraThuNhapNam" type="text" name="thoiDiemTraThuNhapNam"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxThoiDiemTraThuNhapNamLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinThoiDiemTraThuNhapNamLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_TongThuNhapChiuThue">@L("TongThuNhapChiuThue")</label>
+									<input class="form-control m-input" id="ChungTuKTT_TongThuNhapChiuThue" value="@Model.ChungTuKTT.TongThuNhapChiuThue.ToString(CultureInfo.InvariantCulture)" type="number" name="tongThuNhapChiuThue"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_TongThuNhapTinhThue">@L("TongThuNhapTinhThue")</label>
+									<input class="form-control m-input" id="ChungTuKTT_TongThuNhapTinhThue" value="@Model.ChungTuKTT.TongThuNhapTinhThue.ToString(CultureInfo.InvariantCulture)" type="number" name="tongThuNhapTinhThue"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_SoThueTNCNDaKhauTru">@L("SoThueTNCNDaKhauTru")</label>
+									<input class="form-control m-input" id="ChungTuKTT_SoThueTNCNDaKhauTru" value="@Model.ChungTuKTT.SoThueTNCNDaKhauTru.ToString(CultureInfo.InvariantCulture)" type="number" name="soThueTNCNDaKhauTru"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_SoThuNhapDuocNhan">@L("SoThuNhapDuocNhan")</label>
+									<input class="form-control m-input" id="ChungTuKTT_SoThuNhapDuocNhan" value="@Model.ChungTuKTT.SoThuNhapDuocNhan.ToString(CultureInfo.InvariantCulture)" type="number" name="soThuNhapDuocNhan"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_KhoanDongGop">@L("KhoanDongGop")</label>
+									<input class="form-control m-input" id="ChungTuKTT_KhoanDongGop" value="@Model.ChungTuKTT.KhoanDongGop.ToString(CultureInfo.InvariantCulture)" type="number" name="khoanDongGop"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_Email">@L("Email")</label>
+									<input class="form-control" id="ChungTuKTT_Email" value="@Model.ChungTuKTT.Email" type="text" name="email"   maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxEmailLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinEmailLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_ThoiGianNhap">@L("ThoiGianNhap")</label>
+									<input class="form-control m-input date-picker" id="ChungTuKTT_ThoiGianNhap" type="text" name="thoiGianNhap" value="@Model.ChungTuKTT.ThoiGianNhap"/>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_ThoiGianDuyet">@L("ThoiGianDuyet")</label>
+									<input class="form-control m-input date-picker" id="ChungTuKTT_ThoiGianDuyet" type="text" name="thoiGianDuyet" value="@Model.ChungTuKTT.ThoiGianDuyet"/>
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_UserNhap">@L("UserNhap")</label>
+									<input class="form-control" id="ChungTuKTT_UserNhap" value="@Model.ChungTuKTT.UserNhap" type="text" name="userNhap"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxUserNhapLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinUserNhapLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_UserDuyet">@L("UserDuyet")</label>
+									<input class="form-control" id="ChungTuKTT_UserDuyet" value="@Model.ChungTuKTT.UserDuyet" type="text" name="userDuyet"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxUserDuyetLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinUserDuyetLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_TrangThai">@L("TrangThai")</label>
+									<input class="form-control" id="ChungTuKTT_TrangThai" value="@Model.ChungTuKTT.TrangThai" type="text" name="trangThai"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxTrangThaiLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinTrangThaiLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_MauSo">@L("MauSo")</label>
+									<input class="form-control" id="ChungTuKTT_MauSo" value="@Model.ChungTuKTT.MauSo" type="text" name="mauSo"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxMauSoLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinMauSoLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_KyHieu">@L("KyHieu")</label>
+									<input class="form-control" id="ChungTuKTT_KyHieu" value="@Model.ChungTuKTT.KyHieu" type="text" name="kyHieu"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxKyHieuLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinKyHieuLength"  />
+								</div>
+					
+								<div class="my-3">
+									<label class="form-label" for="ChungTuKTT_SoChungTu">@L("SoChungTu")</label>
+									<input class="form-control" id="ChungTuKTT_SoChungTu" value="@Model.ChungTuKTT.SoChungTu" type="text" name="soChungTu"  required  maxlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MaxSoChungTuLength"  minlength="@Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTTConsts.MinSoChungTuLength"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

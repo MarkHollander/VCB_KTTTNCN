@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Qlud.KTTTNCN.EntityFrameworkCore;
 
@@ -11,9 +12,10 @@ using Qlud.KTTTNCN.EntityFrameworkCore;
 namespace Qlud.KTTTNCN.Migrations
 {
     [DbContext(typeof(KTTTNCNDbContext))]
-    partial class KTTTNCNDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209033437_Add_ChungTuKTT")]
+    partial class Add_ChungTuKTT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

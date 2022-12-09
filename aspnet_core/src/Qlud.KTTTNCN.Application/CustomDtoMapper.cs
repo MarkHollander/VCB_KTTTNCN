@@ -1,4 +1,6 @@
-﻿using Qlud.KTTTNCN.ToChucTraThuNhaps.Dtos;
+﻿using Qlud.KTTTNCN.ChungTuKTTs.Dtos;
+using Qlud.KTTTNCN.ChungTuKTTs;
+using Qlud.KTTTNCN.ToChucTraThuNhaps.Dtos;
 using Qlud.KTTTNCN.ToChucTraThuNhaps;
 using Abp.Application.Editions;
 using Abp.Application.Features;
@@ -50,6 +52,8 @@ namespace Qlud.KTTTNCN
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditChungTuKTTDto, ChungTuKTT>().ReverseMap();
+            configuration.CreateMap<ChungTuKTTDto, ChungTuKTT>().ReverseMap();
             configuration.CreateMap<CreateOrEditToChucTraThuNhapDto, ToChucTraThuNhap>().ReverseMap();
             configuration.CreateMap<ToChucTraThuNhapDto, ToChucTraThuNhap>().ReverseMap();
             //Inputs
