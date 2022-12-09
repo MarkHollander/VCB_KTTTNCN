@@ -30,6 +30,11 @@ namespace Qlud.KTTTNCN.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var chungTuKTTs = pages.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs, L("ChungTuKTTs"), multiTenancySides: MultiTenancySides.Host);
+            chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Create, L("CreateNewChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
+            chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Edit, L("EditChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
+            chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Delete, L("DeleteChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
+
             var toChucTraThuNhaps = pages.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps, L("ToChucTraThuNhaps"), multiTenancySides: MultiTenancySides.Host);
             toChucTraThuNhaps.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps_Create, L("CreateNewToChucTraThuNhap"), multiTenancySides: MultiTenancySides.Host);
             toChucTraThuNhaps.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps_Edit, L("EditToChucTraThuNhap"), multiTenancySides: MultiTenancySides.Host);

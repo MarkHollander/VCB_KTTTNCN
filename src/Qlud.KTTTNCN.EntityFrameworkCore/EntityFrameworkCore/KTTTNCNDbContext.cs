@@ -1,4 +1,5 @@
-﻿using Qlud.KTTTNCN.ToChucTraThuNhaps;
+﻿using Qlud.KTTTNCN.ChungTuKTTs;
+using Qlud.KTTTNCN.ToChucTraThuNhaps;
 using Abp.IdentityServer4vNext;
 using Abp.Zero.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,8 @@ namespace Qlud.KTTTNCN.EntityFrameworkCore
 {
     public class KTTTNCNDbContext : AbpZeroDbContext<Tenant, Role, User, KTTTNCNDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<ChungTuKTT> ChungTuKTTs { get; set; }
+
         public virtual DbSet<ToChucTraThuNhap> ToChucTraThuNhaps { get; set; }
 
         /* Define an IDbSet for each entity of the application */

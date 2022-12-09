@@ -22,6 +22,7 @@
 
         public static class Host
         {
+            public const string ChungTuKTTs = "ChungTuKTTs.ChungTuKTTs";
             public const string ToChucTraThuNhaps = "ToChucTraThuNhaps.ToChucTraThuNhaps";
             public const string Tenants = "Tenants";
             public const string Editions = "Editions";

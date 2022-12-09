@@ -1,6 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="ToChucTraThuNhaps">To chuc tra thu nhaps</text>
+  <texts>    <text name="ChungTuKTTs">Chung tu k t ts</text>
+    <text name="ChungTuKTT">Chung tu k t t</text>
+    <text name="Qlud.KTTTNCN.ChungTuKTTs.ChungTuKTT">ChungTuKTT</text>
+    <text name="HoTen">Ho ten</text>
+    <text name="QuocTich">Quoc tich</text>
+    <text name="CuTru">Cu tru</text>
+    <text name="CCCD">C c c d</text>
+    <text name="NoiCap">Noi cap</text>
+    <text name="NgayCap">Ngay cap</text>
+    <text name="KhoanThuNhap">Khoan thu nhap</text>
+    <text name="BaoHiemBatBuoc">Bao hiem bat buoc</text>
+    <text name="ThoiDiemTraThuNhapThang">Thoi diem tra thu nhap thang</text>
+    <text name="ThoiDiemTraThuNhapNam">Thoi diem tra thu nhap nam</text>
+    <text name="TongThuNhapChiuThue">Tong thu nhap chiu thue</text>
+    <text name="TongThuNhapTinhThue">Tong thu nhap tinh thue</text>
+    <text name="SoThueTNCNDaKhauTru">So thue t n c n da khau tru</text>
+    <text name="SoThuNhapDuocNhan">So thu nhap duoc nhan</text>
+    <text name="KhoanDongGop">Khoan dong gop</text>
+    <text name="ThoiGianDuyet">Thoi gian duyet</text>
+    <text name="UserDuyet">User duyet</text>
+    <text name="MauSo">Mau so</text>
+    <text name="KyHieu">Ky hieu</text>
+    <text name="SoChungTu">So chung tu</text>
+    <text name="ChungTuKTTsHeaderInfo">Chung tu k t ts header info</text>
+    <text name="CreateNewChungTuKTT">Create new chung tu k t t</text>
+    <text name="EditChungTuKTT">Edit chung tu k t t</text>
+    <text name="DeleteChungTuKTT">Delete chung tu k t t</text>
+    <text name="NgayCapRange">Ngay cap range</text>
+    <text name="ThoiGianDuyetRange">Thoi gian duyet range</text>
+    <text name="ToChucTraThuNhaps">To chuc tra thu nhaps</text>
     <text name="ToChucTraThuNhap">To chuc tra thu nhap</text>
     <text name="Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhap">ToChucTraThuNhap</text>
     <text name="TenToChuc">Ten to chuc</text>

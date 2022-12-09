@@ -23,6 +23,14 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Startup
                     )
                 )
                 .AddItem(new MenuItemDefinition(
+                        AppPageNames.Host.ChungTuKTTs,
+                        L("ChungTuKTTs"),
+                        url: "App/ChungTuKTTs",
+                        icon: "flaticon-more",
+                        permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_ChungTuKTTs)
+                    )
+                )
+                .AddItem(new MenuItemDefinition(
                         AppPageNames.Host.ToChucTraThuNhaps,
                         L("ToChucTraThuNhaps"),
                         url: "App/ToChucTraThuNhaps",
