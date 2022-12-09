@@ -1,0 +1,124 @@
+﻿@using Qlud.KTTTNCN.Authorization
+@using Qlud.KTTTNCN.Web.Areas.App.Models.ToChucTraThuNhaps
+@using Qlud.KTTTNCN.Web.Areas.App.Startup
+@model ToChucTraThuNhapsViewModel
+@{
+    ViewBag.CurrentPageName = AppPageNames.Host.ToChucTraThuNhaps;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/App/Views/ToChucTraThuNhaps/Index.js" asp-append-version="true"></script>
+}
+
+<div class="content d-flex flex-column flex-column-fluid">
+
+                <abp-page-subheader title='@L("ToChucTraThuNhaps")' description='@L("ToChucTraThuNhapsHeaderInfo")'>
+                     <button id="ExportToExcelButton" class="btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            
+                     @if (IsGranted(AppPermissions.Pages_ToChucTraThuNhaps_Create))
+                     {
+                         <button id="CreateNewToChucTraThuNhapButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewToChucTraThuNhap")</button>                
+                     }
+                </abp-page-subheader>
+            
+<div class="@(await GetContainerClass())">   
+    <div class="card card-custom gutter-b">
+        <div class="card-body">
+            <div class="form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">                        
+                        
+                        
+                <div class="my-3">
+                    <div class="input-group">
+                        <input type="text" id="ToChucTraThuNhapsTableFilter" class="form-control" placeholder='@L("SearchWithThreeDot")' value="@Model.FilterText">
+                        <button id="GetToChucTraThuNhapsButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>                        
+                    </div>
+                </div>
+            
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						
+					</div>
+
+
+							<div class="col-md-3">
+								<div class="my-3">
+									<label class="form-label" for="TenToChucFilterId">@L("TenToChuc")</label>
+									<input type="text" class="form-control" name="tenToChucFilter" id="TenToChucFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label class="form-label" for="MaSoThueFilterId">@L("MaSoThue")</label>
+									<input type="text" class="form-control" name="maSoThueFilter" id="MaSoThueFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label class="form-label" for="DiaChiFilterId">@L("DiaChi")</label>
+									<input type="text" class="form-control" name="diaChiFilter" id="DiaChiFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label class="form-label" for="SoDienThoaiFilterId">@L("SoDienThoai")</label>
+									<input type="text" class="form-control" name="soDienThoaiFilter" id="SoDienThoaiFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label class="form-label" for="UserNhapFilterId">@L("UserNhap")</label>
+									<input type="text" class="form-control" name="userNhapFilter" id="UserNhapFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="my-3">
+										<label class="form-label" for="MinThoiGianNhapFilterId">@L("ThoiGianNhapRange")</label>
+										<div class="input-group">
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")"  id="MinThoiGianNhapFilterId">
+											<span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")"  id="MaxThoiGianNhapFilterId">
+										</div>
+									</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="my-3">
+									<label class="form-label" for="TrangThaiFilterId">@L("TrangThai")</label>
+									<input type="text" class="form-control" name="trangThaiFilter" id="TrangThaiFilterId">
+								</div>
+                            </div>
+
+
+                </div>
+                <div class="row my-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="ToChucTraThuNhapsTable" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            
+                            <th>@L("Actions")</th>
+								<th>@L("TenToChuc")</th>
+								<th>@L("MaSoThue")</th>
+								<th>@L("DiaChi")</th>
+								<th>@L("SoDienThoai")</th>
+								<th>@L("UserNhap")</th>
+								<th>@L("ThoiGianNhap")</th>
+								<th>@L("TrangThai")</th>                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

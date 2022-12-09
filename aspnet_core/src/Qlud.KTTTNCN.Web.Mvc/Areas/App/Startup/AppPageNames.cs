@@ -19,6 +19,7 @@
 
         public static class Host
         {
+            public const string ToChucTraThuNhaps = "ToChucTraThuNhaps.ToChucTraThuNhaps";
             public const string Tenants = "Tenants";
             public const string Editions = "Editions";
             public const string Maintenance = "Administration.Maintenance";

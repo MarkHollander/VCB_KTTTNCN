@@ -1,0 +1,48 @@
+﻿
+@using Qlud.KTTTNCN.Web.Areas.App.Models.Common.Modals
+@using Qlud.KTTTNCN.Web.Areas.App.Models.ToChucTraThuNhaps
+@model ToChucTraThuNhapViewModel
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ToChucTraThuNhapInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("TenToChuc") :</h6>
+                @Model.ToChucTraThuNhap.TenToChuc
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("MaSoThue") :</h6>
+                @Model.ToChucTraThuNhap.MaSoThue
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DiaChi") :</h6>
+                @Model.ToChucTraThuNhap.DiaChi
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SoDienThoai") :</h6>
+                @Model.ToChucTraThuNhap.SoDienThoai
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("UserNhap") :</h6>
+                @Model.ToChucTraThuNhap.UserNhap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ThoiGianNhap") :</h6>
+                @Model.ToChucTraThuNhap.ThoiGianNhap
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TrangThai") :</h6>
+                @Model.ToChucTraThuNhap.TrangThai
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

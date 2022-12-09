@@ -1,6 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>
+  <texts>    <text name="ToChucTraThuNhaps">To chuc tra thu nhaps</text>
+    <text name="ToChucTraThuNhap">To chuc tra thu nhap</text>
+    <text name="Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhap">ToChucTraThuNhap</text>
+    <text name="TenToChuc">Ten to chuc</text>
+    <text name="MaSoThue">Ma so thue</text>
+    <text name="DiaChi">Dia chi</text>
+    <text name="SoDienThoai">So dien thoai</text>
+    <text name="UserNhap">User nhap</text>
+    <text name="ThoiGianNhap">Thoi gian nhap</text>
+    <text name="TrangThai">Trang thai</text>
+    <text name="ToChucTraThuNhapsHeaderInfo">To chuc tra thu nhaps header info</text>
+    <text name="CreateNewToChucTraThuNhap">Create new to chuc tra thu nhap</text>
+    <text name="EditToChucTraThuNhap">Edit to chuc tra thu nhap</text>
+    <text name="DeleteToChucTraThuNhap">Delete to chuc tra thu nhap</text>
+    <text name="{0}IsRequired">{0} is required.</text>
+    <text name="View">View</text>
+    <text name="Details">Details</text>
+    <text name="Pick">Pick</text>
+    <text name="True">True</text>
+    <text name="False">False</text>
+    <text name="MinValue">Min</text>
+    <text name="MaxValue">Max</text>
+    <text name="ThoiGianNhapRange">Thoi gian nhap range</text>
+
     <text name="HomePage">Home page</text>
     <text name="AboutUs">About us</text>
     <text name="Administration">Administration</text>

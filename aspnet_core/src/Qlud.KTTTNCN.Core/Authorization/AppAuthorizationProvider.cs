@@ -29,6 +29,12 @@ namespace Qlud.KTTTNCN.Authorization
             //COMMON PERMISSIONS (FOR BOTH OF TENANTS AND HOST)
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
+
+            var toChucTraThuNhaps = pages.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps, L("ToChucTraThuNhaps"), multiTenancySides: MultiTenancySides.Host);
+            toChucTraThuNhaps.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps_Create, L("CreateNewToChucTraThuNhap"), multiTenancySides: MultiTenancySides.Host);
+            toChucTraThuNhaps.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps_Edit, L("EditToChucTraThuNhap"), multiTenancySides: MultiTenancySides.Host);
+            toChucTraThuNhaps.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps_Delete, L("DeleteToChucTraThuNhap"), multiTenancySides: MultiTenancySides.Host);
+
             pages.CreateChildPermission(AppPermissions.Pages_DemoUiComponents, L("DemoUiComponents"));
 
             var administration = pages.CreateChildPermission(AppPermissions.Pages_Administration, L("Administration"));
@@ -52,7 +58,7 @@ namespace Qlud.KTTTNCN.Authorization
             languages.CreateChildPermission(AppPermissions.Pages_Administration_Languages_Delete, L("DeletingLanguages"), multiTenancySides: _isMultiTenancyEnabled ? MultiTenancySides.Host : MultiTenancySides.Tenant);
             languages.CreateChildPermission(AppPermissions.Pages_Administration_Languages_ChangeTexts, L("ChangingTexts"));
             languages.CreateChildPermission(AppPermissions.Pages_Administration_Languages_ChangeDefaultLanguage, L("ChangeDefaultLanguage"));
-            
+
             administration.CreateChildPermission(AppPermissions.Pages_Administration_AuditLogs, L("AuditLogs"));
 
             var organizationUnits = administration.CreateChildPermission(AppPermissions.Pages_Administration_OrganizationUnits, L("OrganizationUnits"));
