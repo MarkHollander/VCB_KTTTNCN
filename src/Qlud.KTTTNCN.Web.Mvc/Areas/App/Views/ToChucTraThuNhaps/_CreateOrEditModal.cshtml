@@ -1,0 +1,57 @@
+﻿
+@using System.Globalization
+@using Qlud.KTTTNCN.Web.Areas.App.Models.Common.Modals
+@using Qlud.KTTTNCN.Web.Areas.App.Models.ToChucTraThuNhaps
+@model CreateOrEditToChucTraThuNhapModalViewModel
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditToChucTraThuNhap")) : L("CreateNewToChucTraThuNhap")))
+
+<div class="modal-body">
+    <div id="ToChucTraThuNhapInformationsTab">
+        <form name="ToChucTraThuNhapInformationsForm" role="form" novalidate class="form-validation">
+
+            @if (Model.IsEditMode)
+            {
+            <input type="hidden" name="id" value="@Model.ToChucTraThuNhap.Id" />
+            }
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_TenToChuc">@L("TenToChuc")</label>
+                <input class="form-control" id="ToChucTraThuNhap_TenToChuc" value="@Model.ToChucTraThuNhap.TenToChuc" type="text" name="tenToChuc" required maxlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MaxTenToChucLength" minlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MinTenToChucLength" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_MaSoThue">@L("MaSoThue")</label>
+                <input class="form-control" id="ToChucTraThuNhap_MaSoThue" value="@Model.ToChucTraThuNhap.MaSoThue" type="text" name="maSoThue" required maxlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MaxMaSoThueLength" minlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MinMaSoThueLength" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_DiaChi">@L("DiaChi")</label>
+                <input class="form-control" id="ToChucTraThuNhap_DiaChi" value="@Model.ToChucTraThuNhap.DiaChi" type="text" name="diaChi" required maxlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MaxDiaChiLength" minlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MinDiaChiLength" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_SoDienThoai">@L("SoDienThoai")</label>
+                <input class="form-control" id="ToChucTraThuNhap_SoDienThoai" value="@Model.ToChucTraThuNhap.SoDienThoai" type="text" name="soDienThoai" required maxlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MaxSoDienThoaiLength" minlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MinSoDienThoaiLength" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_UserNhap">@L("UserNhap")</label>
+                <input class="form-control" id="ToChucTraThuNhap_UserNhap" value="@Model.ToChucTraThuNhap.UserNhap" type="text" name="userNhap" required maxlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MaxUserNhapLength" minlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MinUserNhapLength" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_ThoiGianNhap">@L("ThoiGianNhap")</label>
+                <input class="form-control m-input date-picker" id="ToChucTraThuNhap_ThoiGianNhap" type="text" name="thoiGianNhap" value="@Model.ToChucTraThuNhap.ThoiGianNhap" />
+            </div>
+
+            <div class="my-3">
+                <label class="form-label" for="ToChucTraThuNhap_TrangThai">@L("TrangThai")</label>
+                <input class="form-control" id="ToChucTraThuNhap_TrangThai" value="@Model.ToChucTraThuNhap.TrangThai" type="text" name="trangThai" required maxlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MaxTrangThaiLength" minlength="@Qlud.KTTTNCN.ToChucTraThuNhaps.ToChucTraThuNhapConsts.MinTrangThaiLength" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -21,6 +21,14 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Startup
                         icon: "flaticon-line-graph",
                         permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_Administration_Host_Dashboard)
                     )
+                )
+                .AddItem(new MenuItemDefinition(
+                        AppPageNames.Host.ToChucTraThuNhaps,
+                        L("ToChucTraThuNhaps"),
+                        url: "App/ToChucTraThuNhaps",
+                        icon: "flaticon-more",
+                        permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_ToChucTraThuNhaps)
+                    )
                 ).AddItem(new MenuItemDefinition(
                         AppPageNames.Host.Tenants,
                         L("Tenants"),

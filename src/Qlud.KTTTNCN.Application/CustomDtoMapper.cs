@@ -1,4 +1,6 @@
-﻿using Abp.Application.Editions;
+﻿using Qlud.KTTTNCN.ToChucTraThuNhaps.Dtos;
+using Qlud.KTTTNCN.ToChucTraThuNhaps;
+using Abp.Application.Editions;
 using Abp.Application.Features;
 using Abp.Auditing;
 using Abp.Authorization;
@@ -48,6 +50,8 @@ namespace Qlud.KTTTNCN
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditToChucTraThuNhapDto, ToChucTraThuNhap>().ReverseMap();
+            configuration.CreateMap<ToChucTraThuNhapDto, ToChucTraThuNhap>().ReverseMap();
             //Inputs
             configuration.CreateMap<CheckboxInputType, FeatureInputTypeDto>();
             configuration.CreateMap<SingleLineStringInputType, FeatureInputTypeDto>();
@@ -76,8 +80,6 @@ namespace Qlud.KTTTNCN
             configuration.CreateMap<Role, RoleListDto>();
             configuration.CreateMap<UserRole, UserListRoleDto>();
 
-            
-
             //Edition
             configuration.CreateMap<EditionEditDto, SubscribableEdition>().ReverseMap();
             configuration.CreateMap<EditionCreateDto, SubscribableEdition>();
@@ -90,7 +92,6 @@ namespace Qlud.KTTTNCN
             configuration.CreateMap<Edition, EditionEditDto>();
             configuration.CreateMap<Edition, SubscribableEdition>();
             configuration.CreateMap<Edition, EditionSelectDto>();
-
 
             //Payment
             configuration.CreateMap<SubscriptionPaymentDto, SubscriptionPayment>().ReverseMap();
@@ -159,7 +160,7 @@ namespace Qlud.KTTTNCN
             configuration.CreateMap<DynamicEntityPropertyDto, DynamicEntityProperty>();
 
             configuration.CreateMap<DynamicEntityPropertyValue, DynamicEntityPropertyValueDto>().ReverseMap();
-            
+
             //User Delegations
             configuration.CreateMap<CreateUserDelegationDto, UserDelegation>();
 

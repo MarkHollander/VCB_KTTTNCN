@@ -1,4 +1,5 @@
-﻿using Abp.IdentityServer4vNext;
+﻿using Qlud.KTTTNCN.ToChucTraThuNhaps;
+using Abp.IdentityServer4vNext;
 using Abp.Zero.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Qlud.KTTTNCN.Authorization.Delegation;
@@ -16,6 +17,8 @@ namespace Qlud.KTTTNCN.EntityFrameworkCore
 {
     public class KTTTNCNDbContext : AbpZeroDbContext<Tenant, Role, User, KTTTNCNDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<ToChucTraThuNhap> ToChucTraThuNhaps { get; set; }
+
         /* Define an IDbSet for each entity of the application */
 
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
@@ -35,7 +38,7 @@ namespace Qlud.KTTTNCN.EntityFrameworkCore
         public virtual DbSet<SubscriptionPaymentExtensionData> SubscriptionPaymentExtensionDatas { get; set; }
 
         public virtual DbSet<UserDelegation> UserDelegations { get; set; }
-        
+
         public virtual DbSet<RecentPassword> RecentPasswords { get; set; }
 
         public KTTTNCNDbContext(DbContextOptions<KTTTNCNDbContext> options)
