@@ -63,6 +63,11 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Controllers
             return PartialView("_CreateOrEditModal", viewModel);
         }
 
+        public async Task<PartialViewResult> ImportExcelModal()
+        {
+            return PartialView("_ImportExcelModal");
+        }
+
         public async Task<PartialViewResult> ViewChungTuKTTModal(long id)
         {
             var getChungTuKTTForViewDto = await _chungTuKTTsAppService.GetChungTuKTTForView(id);

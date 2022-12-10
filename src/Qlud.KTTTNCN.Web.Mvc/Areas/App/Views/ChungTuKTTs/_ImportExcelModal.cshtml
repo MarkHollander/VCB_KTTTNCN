@@ -1,0 +1,58 @@
+﻿@using System.Globalization
+@using Qlud.KTTTNCN.Web.Areas.App.Models.Common.Modals
+@using Qlud.KTTTNCN.Web.Areas.App.Models.ChungTuKTTs
+
+@using Abp.Extensions
+@await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ImportExcelChungTuKTT")))
+
+<div class="content d-flex flex-column flex-column-fluid">
+    <div class="col-md-12 row">        
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-7">
+            <input id="ChungTuBatch" name="chungTuBatch" class="form-control" type="file" />
+        </div>
+        <div class="col-md-3">
+            <button id="ChooseFileButton" type="submit" class="col-md-12 btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("Import")</button>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+    <div class="modal-body">
+        <div id="ChungTuKTTInformationsTab">
+            <form name="ChungTuKTTInformationsForm" role="form" novalidate class="form-validation">
+                <div class="row align-items-center">
+                    <table id="ImportedChungTuKTTsTable" class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>@L("Actions")</th>
+                                <th>@L("HoTen")</th>
+                                <th>@L("MaSoThue")</th>
+                                <th>@L("DiaChi")</th>
+                                <th>@L("QuocTich")</th>
+                                <th>@L("CuTru")</th>
+                                <th>@L("CCCD")</th>
+                                <th>@L("NoiCap")</th>
+                                <th>@L("NgayCap")</th>
+                                <th>@L("KhoanThuNhap")</th>
+                                <th>@L("BaoHiemBatBuoc")</th>
+                                <th>@L("ThoiDiemTraThuNhapThang")</th>
+                                <th>@L("ThoiDiemTraThuNhapNam")</th>
+                                <th>@L("TongThuNhapChiuThue")</th>
+                                <th>@L("TongThuNhapTinhThue")</th>
+                                <th>@L("SoThueTNCNDaKhauTru")</th>
+                                <th>@L("SoThuNhapDuocNhan")</th>
+                                <th>@L("KhoanDongGop")</th>
+                                <th>@L("Email")</th>
+                                <th>@L("TrangThai")</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

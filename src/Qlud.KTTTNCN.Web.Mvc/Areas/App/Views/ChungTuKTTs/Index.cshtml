@@ -19,6 +19,8 @@ ViewBag.CurrentPageName = AppPageNames.Host.ChungTuKTTs;
         {
         <button id="CreateNewChungTuKTTButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewChungTuKTT")</button>
         }
+
+        <button id="ImportExcelButton" class="btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("ImportExcel")</button>
     </abp-page-subheader>
 
     <div class="@(await GetContainerClass())">

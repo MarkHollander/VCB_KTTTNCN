@@ -1,20 +1,20 @@
-﻿using System;
+﻿using Abp.Application.Services.Dto;
+using Abp.Authorization;
+using Abp.Domain.Repositories;
+using Abp.Linq.Extensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+using Qlud.KTTTNCN.Authorization;
+using Qlud.KTTTNCN.ChungTuKTTs.Dtos;
+using Qlud.KTTTNCN.ChungTuKTTs.Exporting;
+using Qlud.KTTTNCN.Dto;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using Abp.Linq.Extensions;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Abp.Domain.Repositories;
-using Qlud.KTTTNCN.ChungTuKTTs.Exporting;
-using Qlud.KTTTNCN.ChungTuKTTs.Dtos;
-using Qlud.KTTTNCN.Dto;
-using Abp.Application.Services.Dto;
-using Qlud.KTTTNCN.Authorization;
-using Abp.Extensions;
-using Abp.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Abp.UI;
-using Qlud.KTTTNCN.Storage;
 
 namespace Qlud.KTTTNCN.ChungTuKTTs
 {
@@ -296,5 +296,84 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
             return _chungTuKTTsExcelExporter.ExportToFile(chungTuKTTListDtos);
         }
 
+        public async Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile chungTuBatch)
+        {
+            List<GetChungTuKTTForViewDto> results = new List<GetChungTuKTTForViewDto>();
+            if (chungTuBatch?.Length > 0)
+            {
+                var stream = chungTuBatch.OpenReadStream();
+
+                try
+                {
+                    using (var package = new ExcelPackage(stream))
+                    {
+                        var worksheet = package.Workbook.Worksheets.First();
+                        var rowCount = worksheet.Dimension.Rows;
+
+                        for (var row = 2; row < rowCount; row++)
+                        {
+                            try
+                            {
+                                int index = 1;
+                                var hoTen = worksheet.Cells[row, index++].Value?.ToString();
+                                var maSoThue = worksheet.Cells[row, index++].Value?.ToString();
+                                var diaChi = worksheet.Cells[row, index++].Value?.ToString();
+                                var quocTich = worksheet.Cells[row, index++].Value?.ToString();
+                                var cuTru = worksheet.Cells[row, index++].Value?.ToString();
+                                var cccd = worksheet.Cells[row, index++].Value?.ToString();
+                                var ngayCap = worksheet.Cells[row, index++].Value?.ToString();
+                                var noiCap = worksheet.Cells[row, index++].Value?.ToString();
+                                var khoanThuNhap = worksheet.Cells[row, index++].Value?.ToString();
+                                var baoHiemBatBuoc = worksheet.Cells[row, index++].Value?.ToString();
+                                var thoiDiemTraThuNhapThang = worksheet.Cells[row, index++].Value?.ToString();
+                                var thoiDiemTraThuNhapNam = worksheet.Cells[row, index++].Value?.ToString();
+                                var tongThuNhapChiuThue = worksheet.Cells[row, index++].Value?.ToString();
+                                var tongThuNhapTinhThue = worksheet.Cells[row, index++].Value?.ToString();
+                                var soThueTNCNDaKhauTru = worksheet.Cells[row, index++].Value?.ToString();
+                                var soThuNhapDuocNhan = worksheet.Cells[row, index++].Value?.ToString();
+                                var khoanDongGop = worksheet.Cells[row, index++].Value?.ToString();
+                                var email = worksheet.Cells[row, index++].Value?.ToString();
+
+                                GetChungTuKTTForViewDto chungTuTmp = new GetChungTuKTTForViewDto()
+                                {
+                                    ChungTuKTT = new ChungTuKTTDto()
+                                    {
+                                        HoTen = hoTen,
+                                        MaSoThue = maSoThue,
+                                        DiaChi = diaChi,
+                                        QuocTich = quocTich,
+                                        CuTru = cuTru,
+                                        CCCD = cccd,
+                                        NoiCap = noiCap,
+                                        NgayCap = DateTime.ParseExact(ngayCap, "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                                        KhoanThuNhap = Decimal.Parse(khoanThuNhap),
+                                        BaoHiemBatBuoc = baoHiemBatBuoc,
+                                        ThoiDiemTraThuNhapThang = thoiDiemTraThuNhapThang,
+                                        ThoiDiemTraThuNhapNam = thoiDiemTraThuNhapNam,
+                                        TongThuNhapChiuThue = Decimal.Parse(tongThuNhapChiuThue),
+                                        TongThuNhapTinhThue = Decimal.Parse(tongThuNhapTinhThue),
+                                        SoThueTNCNDaKhauTru = Decimal.Parse(soThueTNCNDaKhauTru),
+                                        SoThuNhapDuocNhan = Decimal.Parse(soThuNhapDuocNhan),
+                                        KhoanDongGop = Decimal.Parse(khoanDongGop),
+                                        Email = email
+                                    }
+                                };
+                            }
+                            catch (Exception ex)
+                            {
+                                throw;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            }
+
+
+            return new PagedResultDto<GetChungTuKTTForViewDto>(results.Count, results);
+        }
     }
 }

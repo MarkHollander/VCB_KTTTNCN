@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Abp.Web.Common" Version="7.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>
