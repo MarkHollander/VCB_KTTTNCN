@@ -7,6 +7,12 @@
         var _modalManager;
         var _$chungTuKTTInformationForm = null;
 
+        var _permissions = {
+            create: abp.auth.hasPermission('Pages.ChungTuKTTs.Create'),
+            edit: abp.auth.hasPermission('Pages.ChungTuKTTs.Edit'),
+            'delete': abp.auth.hasPermission('Pages.ChungTuKTTs.Delete')
+        };
+
         this.init = function (modalManager) {
             _modalManager = modalManager;
 
@@ -17,9 +23,23 @@
                 format: 'L'
             });
 
-            _$chungTuKTTInformationForm = _modalManager.getModal().find('form[name=ChungTuKTTInformationsForm]');
+            _$chungTuKTTInformationForm = _modalManager.getModal().find('form[name=ImportChungTuKTTInformationsForm]');
             _$chungTuKTTInformationForm.validate();
         };
+
+        //var form = $('#ImportChungTuKTT_ChungTuBatch').val();
+        //var form1 = document.getElementById('ImportChungTuKTT_ChungTuBatch');
+        //console.log(form);
+        //var data = new FormData();
+        //if (form) {
+        //    console.log('im here');
+        //    var data = new FormData(form);
+        //}
+
+        var data = new FormData();
+        jQuery.each(jQuery('#ImportChungTuKTT_ChungTuBatch')[0].files, function (i, file) {
+            data.append('file-' + i, file)
+        });
 
         var index = 0;
         var dataTable = _$importedChungTuKTTsTable.DataTable({
@@ -28,13 +48,30 @@
             processing: true,
             listAction: {
                 ajaxFunction: _chungTuKTTsService.importChungTuKTTsFromExcel,
+                contentType: 'multipart/form-data',
                 inputFilter: function () {
-                    console.log('imhere123');
+                    console.log('data: ', data);
                     return {
-                        chungTuBatch: $('#ChungTuBatch').val()
+                        chungTuBatch: data
                     };
                 }
             },
+            //"ajax": {
+            //    "type": "POST",
+            //    "enctype": 'multipart/form-data',
+            //    "url": "/ChungTuKTTs/ImportChungTuKTTsFromExcel",
+            //    data: data,
+            //    processData: false,
+            //    contentType: false,
+            //    cache: false,
+            //    timeout: 60000,
+            //    success: function (data) {
+            //        console.log('success: ', data);
+            //    },
+            //    error: function (e) {
+            //        console.log('Error: ', e)
+            //    }
+            //},
             columnDefs: [
                 {
                     className: 'control responsive',
@@ -180,6 +217,11 @@
                     targets: index++,
                     data: "chungTuKTT.email",
                     name: "email"
+                },
+                {
+                    targets: index++,
+                    data: "chungTuKTT.trangThai",
+                    name: "trangThai"
                 }
             ]
         });
@@ -188,12 +230,33 @@
             dataTable.ajax.reload();
         }
 
-        $('#ChooseFileButton').click(function () {
+        $('#ImportChungTuKTT_ChooseFileButton').click(function () {
             console.log('importFile');
-            var importFile = $('#ChungTuBatch').val();
+            var importFile = $('#ImportChungTuKTT_ChungTuBatch').val();
             console.log(importFile);
+                        
+            //form = $('#ImportChungTuKTT_ChungTuBatch').val();
+            //form1 = document.getElementById('ImportChungTuKTT_ChungTuBatch');
+            //console.log(form);
+            //data = new FormData();
+            //if (form) {
+            //    console.log('im here');
+            //    data = new FormData();
+            //    data.append("chungTuBatch", form);
+            //}
 
-            _chungTuKTTsService.importChungTuKTTsFromExcel(importFile);
+            //_chungTuKTTsService.importChungTuKTTsFromExcel(
+            //    importFile
+            //).done(function (data) {
+            //    console.log('done');
+            //    console.log(data);
+            //});
+
+            data = new FormData();
+            jQuery.each(jQuery('#ImportChungTuKTT_ChungTuBatch')[0].files, function (i, file) {
+                data.append('file-' + i, file)
+            });
+
             importChungTuKTTs();
         });
 

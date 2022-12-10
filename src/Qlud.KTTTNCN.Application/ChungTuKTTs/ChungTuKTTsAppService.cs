@@ -296,21 +296,19 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
             return _chungTuKTTsExcelExporter.ExportToFile(chungTuKTTListDtos);
         }
 
-        public async Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile chungTuBatch)
+        public async Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch)
         {
             List<GetChungTuKTTForViewDto> results = new List<GetChungTuKTTForViewDto>();
-            if (chungTuBatch?.Length > 0)
+            if (ChungTuBatch?.Length > 0)
             {
-                var stream = chungTuBatch.OpenReadStream();
-
+                var stream = ChungTuBatch.OpenReadStream();
                 try
                 {
                     using (var package = new ExcelPackage(stream))
                     {
                         var worksheet = package.Workbook.Worksheets.First();
                         var rowCount = worksheet.Dimension.Rows;
-
-                        for (var row = 2; row < rowCount; row++)
+                        for (var row = 2; row <= rowCount; row++)
                         {
                             try
                             {
@@ -334,10 +332,41 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                 var khoanDongGop = worksheet.Cells[row, index++].Value?.ToString();
                                 var email = worksheet.Cells[row, index++].Value?.ToString();
 
+                                decimal khoanThuNhapDecimal = 0;
+                                decimal tongThuNhapChiuThueDecimal = 0;
+                                decimal tongThuNhapTinhThueDecimal = 0;
+                                decimal soThueTNCNDaKhauTruDecimal = 0;
+                                decimal soThuNhapDuocNhanDecimal = 0;
+                                decimal khoanDongGopDecimal = 0;
+                                Decimal.TryParse(khoanThuNhap, out khoanThuNhapDecimal);
+                                Decimal.TryParse(tongThuNhapChiuThue, out tongThuNhapChiuThueDecimal);
+                                Decimal.TryParse(tongThuNhapTinhThue, out tongThuNhapTinhThueDecimal);
+                                Decimal.TryParse(soThueTNCNDaKhauTru, out soThueTNCNDaKhauTruDecimal);
+                                Decimal.TryParse(soThuNhapDuocNhan, out soThuNhapDuocNhanDecimal);
+                                Decimal.TryParse(khoanDongGop, out khoanDongGopDecimal);
+
                                 GetChungTuKTTForViewDto chungTuTmp = new GetChungTuKTTForViewDto()
                                 {
                                     ChungTuKTT = new ChungTuKTTDto()
                                     {
+                                        //HoTen = hoTen,
+                                        //MaSoThue = maSoThue,
+                                        //DiaChi = diaChi,
+                                        //QuocTich = quocTich,
+                                        //CuTru = cuTru,
+                                        //CCCD = cccd,
+                                        //NoiCap = noiCap,
+                                        //NgayCap = // DateTime.ParseExact(ngayCap, "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                                        //KhoanThuNhap = Decimal.Parse(khoanThuNhap),
+                                        //BaoHiemBatBuoc = baoHiemBatBuoc,
+                                        //ThoiDiemTraThuNhapThang = thoiDiemTraThuNhapThang,
+                                        //ThoiDiemTraThuNhapNam = thoiDiemTraThuNhapNam,
+                                        //TongThuNhapChiuThue = Decimal.Parse(tongThuNhapChiuThue),
+                                        //TongThuNhapTinhThue = Decimal.Parse(tongThuNhapTinhThue),
+                                        //SoThueTNCNDaKhauTru = Decimal.Parse(soThueTNCNDaKhauTru),
+                                        //SoThuNhapDuocNhan = Decimal.Parse(soThuNhapDuocNhan),
+                                        //KhoanDongGop = Decimal.Parse(khoanDongGop),
+                                        //Email = email
                                         HoTen = hoTen,
                                         MaSoThue = maSoThue,
                                         DiaChi = diaChi,
@@ -345,19 +374,21 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                         CuTru = cuTru,
                                         CCCD = cccd,
                                         NoiCap = noiCap,
-                                        NgayCap = DateTime.ParseExact(ngayCap, "yyyy-MM-dd", CultureInfo.InvariantCulture),
-                                        KhoanThuNhap = Decimal.Parse(khoanThuNhap),
+                                        NgayCap = DateTime.Now,
+                                        KhoanThuNhap = khoanThuNhapDecimal,
                                         BaoHiemBatBuoc = baoHiemBatBuoc,
                                         ThoiDiemTraThuNhapThang = thoiDiemTraThuNhapThang,
                                         ThoiDiemTraThuNhapNam = thoiDiemTraThuNhapNam,
-                                        TongThuNhapChiuThue = Decimal.Parse(tongThuNhapChiuThue),
-                                        TongThuNhapTinhThue = Decimal.Parse(tongThuNhapTinhThue),
-                                        SoThueTNCNDaKhauTru = Decimal.Parse(soThueTNCNDaKhauTru),
-                                        SoThuNhapDuocNhan = Decimal.Parse(soThuNhapDuocNhan),
-                                        KhoanDongGop = Decimal.Parse(khoanDongGop),
+                                        TongThuNhapChiuThue = tongThuNhapChiuThueDecimal,
+                                        TongThuNhapTinhThue = tongThuNhapTinhThueDecimal,
+                                        SoThueTNCNDaKhauTru = soThueTNCNDaKhauTruDecimal,
+                                        SoThuNhapDuocNhan = soThuNhapDuocNhanDecimal,
+                                        KhoanDongGop = khoanDongGopDecimal,
                                         Email = email
                                     }
                                 };
+
+                                results.Add(chungTuTmp);
                             }
                             catch (Exception ex)
                             {

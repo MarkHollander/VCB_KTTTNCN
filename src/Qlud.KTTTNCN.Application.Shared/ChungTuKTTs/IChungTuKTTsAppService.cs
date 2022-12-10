@@ -23,6 +23,6 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
 
         Task<FileDto> GetChungTuKTTsToExcel(GetAllChungTuKTTsForExcelInput input);
 
-        Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile chungTuBatch);
+        Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch);
     }
 }
