@@ -54,7 +54,7 @@
             viewUrl: abp.appPath + 'App/ChungTuKTTs/ViewchungTuKTTModal',
             modalClass: 'ViewChungTuKTTModal'
         });
-        
+
 
         var _importChungTuKTTModal = new app.ModalManager({
             viewUrl: abp.appPath + 'App/ChungTuKTTs/ImportExcelModal',

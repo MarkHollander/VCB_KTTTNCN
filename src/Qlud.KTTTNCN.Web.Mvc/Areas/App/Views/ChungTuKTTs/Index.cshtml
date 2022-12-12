@@ -13,7 +13,7 @@ ViewBag.CurrentPageName = AppPageNames.Host.ChungTuKTTs;
 <div class="content d-flex flex-column flex-column-fluid">
 
     <abp-page-subheader title='@L("ChungTuKTTs")' description='@L("ChungTuKTTsHeaderInfo")'>
-        <button id="ExportToExcelButton" class="btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+        @*<button id="ExportToExcelButton" class="btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>*@
 
         @if (IsGranted(AppPermissions.Pages_ChungTuKTTs_Create))
         {

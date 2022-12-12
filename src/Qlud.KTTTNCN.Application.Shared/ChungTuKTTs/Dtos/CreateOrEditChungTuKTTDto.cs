@@ -68,11 +68,9 @@ namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
 
         public DateTime ThoiGianDuyet { get; set; }
 
-        [Required]
         [StringLength(ChungTuKTTConsts.MaxUserNhapLength, MinimumLength = ChungTuKTTConsts.MinUserNhapLength)]
         public string UserNhap { get; set; }
 
-        [Required]
         [StringLength(ChungTuKTTConsts.MaxUserDuyetLength, MinimumLength = ChungTuKTTConsts.MinUserDuyetLength)]
         public string UserDuyet { get; set; }
 
@@ -80,15 +78,12 @@ namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
         [StringLength(ChungTuKTTConsts.MaxTrangThaiLength, MinimumLength = ChungTuKTTConsts.MinTrangThaiLength)]
         public string TrangThai { get; set; }
 
-        [Required]
         [StringLength(ChungTuKTTConsts.MaxMauSoLength, MinimumLength = ChungTuKTTConsts.MinMauSoLength)]
         public string MauSo { get; set; }
 
-        [Required]
         [StringLength(ChungTuKTTConsts.MaxKyHieuLength, MinimumLength = ChungTuKTTConsts.MinKyHieuLength)]
         public string KyHieu { get; set; }
 
-        [Required]
         [StringLength(ChungTuKTTConsts.MaxSoChungTuLength, MinimumLength = ChungTuKTTConsts.MinSoChungTuLength)]
         public string SoChungTu { get; set; }
 

@@ -27,51 +27,21 @@
             _$chungTuKTTInformationForm.validate();
         };
 
-        //var form = $('#ImportChungTuKTT_ChungTuBatch').val();
-        //var form1 = document.getElementById('ImportChungTuKTT_ChungTuBatch');
-        //console.log(form);
-        //var data = new FormData();
-        //if (form) {
-        //    console.log('im here');
-        //    var data = new FormData(form);
-        //}
-
-        var data = new FormData();
-        jQuery.each(jQuery('#ImportChungTuKTT_ChungTuBatch')[0].files, function (i, file) {
-            data.append('file-' + i, file)
-        });
-
+        var idList = [];
         var index = 0;
         var dataTable = _$importedChungTuKTTsTable.DataTable({
             paging: true,
             serverSide: true,
             processing: true,
+            deferLoading: false,
             listAction: {
-                ajaxFunction: _chungTuKTTsService.importChungTuKTTsFromExcel,
-                contentType: 'multipart/form-data',
+                ajaxFunction: _chungTuKTTsService.getByIdList,
                 inputFilter: function () {
-                    console.log('data: ', data);
                     return {
-                        chungTuBatch: data
+                        idListFilter: idList
                     };
                 }
             },
-            //"ajax": {
-            //    "type": "POST",
-            //    "enctype": 'multipart/form-data',
-            //    "url": "/ChungTuKTTs/ImportChungTuKTTsFromExcel",
-            //    data: data,
-            //    processData: false,
-            //    contentType: false,
-            //    cache: false,
-            //    timeout: 60000,
-            //    success: function (data) {
-            //        console.log('success: ', data);
-            //    },
-            //    error: function (e) {
-            //        console.log('Error: ', e)
-            //    }
-            //},
             columnDefs: [
                 {
                     className: 'control responsive',
@@ -166,7 +136,6 @@
                         }
                         return "";
                     }
-
                 },
                 {
                     targets: index++,
@@ -226,38 +195,29 @@
             ]
         });
 
-        function importChungTuKTTs() {
+        function reloadImportChungTuKTTs() {
             dataTable.ajax.reload();
         }
 
         $('#ImportChungTuKTT_ChooseFileButton').click(function () {
-            console.log('importFile');
-            var importFile = $('#ImportChungTuKTT_ChungTuBatch').val();
-            console.log(importFile);
-                        
-            //form = $('#ImportChungTuKTT_ChungTuBatch').val();
-            //form1 = document.getElementById('ImportChungTuKTT_ChungTuBatch');
-            //console.log(form);
-            //data = new FormData();
-            //if (form) {
-            //    console.log('im here');
-            //    data = new FormData();
-            //    data.append("chungTuBatch", form);
-            //}
+            //Set the URL.
+            var url = $("#ImportChungTuKTTsFromExcelForm").attr("action");
+            //Add the Field values to FormData object.
+            var formData = new FormData();
+            formData.append("chungTuBatch", $("#ImportChungTuKTT_ChungTuBatch")[0].files[0]);
 
-            //_chungTuKTTsService.importChungTuKTTsFromExcel(
-            //    importFile
-            //).done(function (data) {
-            //    console.log('done');
-            //    console.log(data);
-            //});
-
-            data = new FormData();
-            jQuery.each(jQuery('#ImportChungTuKTT_ChungTuBatch')[0].files, function (i, file) {
-                data.append('file-' + i, file)
-            });
-
-            importChungTuKTTs();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false
+            }).done(async function (response) {
+                // import multi time
+                idList.push.apply(idList, response.result);
+                // reload the list
+                reloadImportChungTuKTTs();
+            })
         });
 
         this.save = function () {
@@ -277,7 +237,5 @@
                 _modalManager.setBusy(false);
             });
         };
-
-
     };
 })(jQuery);

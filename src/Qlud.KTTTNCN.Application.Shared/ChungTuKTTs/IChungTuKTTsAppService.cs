@@ -13,6 +13,8 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
     {
         Task<PagedResultDto<GetChungTuKTTForViewDto>> GetAll(GetAllChungTuKTTsInput input);
 
+        Task<PagedResultDto<GetChungTuKTTForViewDto>> GetByIdList(GetAllChungTuKTTsInput input);
+
         Task<GetChungTuKTTForViewDto> GetChungTuKTTForView(long id);
 
         Task<GetChungTuKTTForEditOutput> GetChungTuKTTForEdit(EntityDto<long> input);
@@ -23,6 +25,6 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
 
         Task<FileDto> GetChungTuKTTsToExcel(GetAllChungTuKTTsForExcelInput input);
 
-        Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch);
+        Task<List<long>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch);
     }
 }

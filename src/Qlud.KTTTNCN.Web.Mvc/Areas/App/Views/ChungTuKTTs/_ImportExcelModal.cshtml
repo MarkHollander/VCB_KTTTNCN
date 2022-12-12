@@ -6,33 +6,16 @@
 @await Html.PartialAsync("~/Areas/App/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ImportExcelChungTuKTT")))
 
 <div class="content d-flex flex-column flex-column-fluid">
-    <form asp-action="ImportChungTuKTTsFromExcel" asp-controller="ChungTuKTTs" method="post" enctype="multipart/form-data">
-        <div class="col-md-12 row">
-            <div class="col-md-1">
-            </div>
-            <div class="col-md-7">
-                <input id="ImportChungTuKTT_ChungTuBatch" name="chungTuBatch" class="form-control" type="file" />
-            </div>
-            <div class="col-md-3">
-                <button id="ImportChungTuKTT_ChooseFileButton" type="submit" class="col-md-12 btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("Import")</button>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-    </form>
-
-    @*<div class="col-md-12 row">
-        <div class="col-md-1">
-        </div>
-        <div class="col-md-7">
-            <input id="ImportChungTuKTT_ChungTuBatch" name="chungTuBatch" class="form-control" type="file" />
-        </div>
-        <div class="col-md-3">
-            <button id="ImportChungTuKTT_ChooseFileButton" type="submit" class="col-md-12 btn btn-outline btn-outline-success btn-active-light-success me-1"><i class="fa fa-file-excel"></i> @L("Import")</button>
-        </div>
-        <div class="col-md-1">
-        </div>
-    </div>*@
+    <form id="ImportChungTuKTTsFromExcelForm" method="post" enctype="multipart/form-data" asp-controller="ChungTuKTTs" asp-action="ImportChungTuKTTsFromExcel">
+        <table>
+            <tr>
+                <td><input id="ImportChungTuKTT_ChungTuBatch" class="form-control" type="file" name="chungTuBatch" /></td>
+                <td></td>
+                <td><input id="ImportChungTuKTT_ChooseFileButton" class="col-md-12 btn btn-outline btn-outline-success btn-active-light-success me-1" type="button" value="Submit" /></td>
+            </tr>
+        </table>
+        <hr />        
+    </form>    
 
     <div class="modal-body">
         <div id="ImportChungTuKTTInformationsTab">

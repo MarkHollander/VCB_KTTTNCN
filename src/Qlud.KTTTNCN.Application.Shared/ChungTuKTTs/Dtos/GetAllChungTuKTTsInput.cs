@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
+using System.Collections.Generic;
 
 namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
 {
@@ -67,6 +68,6 @@ namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
         public string KyHieuFilter { get; set; }
 
         public string SoChungTuFilter { get; set; }
-
+        public List<long> IdListFilter { get; set; }
     }
 }

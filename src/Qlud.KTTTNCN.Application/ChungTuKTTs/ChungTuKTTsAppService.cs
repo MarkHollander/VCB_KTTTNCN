@@ -73,7 +73,7 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                         .WhereIf(!string.IsNullOrWhiteSpace(input.SoChungTuFilter), e => e.SoChungTu == input.SoChungTuFilter);
 
             var pagedAndFilteredChungTuKTTs = filteredChungTuKTTs
-                .OrderBy(input.Sorting ?? "id asc")
+                .OrderBy(input.Sorting ?? "id desc")
                 .PageBy(input);
 
             var chungTuKTTs = from o in pagedAndFilteredChungTuKTTs
@@ -98,14 +98,16 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                   o.SoThuNhapDuocNhan,
                                   o.KhoanDongGop,
                                   o.Email,
+
                                   o.ThoiGianNhap,
-                                  o.ThoiGianDuyet,
-                                  o.UserNhap,
-                                  o.UserDuyet,
+                                  o.ThoiGianDuyet,                                  
+                                  UserNhap = string.IsNullOrEmpty(o.UserNhap) ? "" : o.UserNhap,
+                                  UserDuyet = string.IsNullOrEmpty(o.UserDuyet) ? "" : o.UserDuyet,
+                                  MauSo = string.IsNullOrEmpty(o.MauSo) ? "" : o.MauSo,
+                                  KyHieu = string.IsNullOrEmpty(o.KyHieu) ? "" : o.KyHieu,
+                                  SoChungTu = string.IsNullOrEmpty(o.SoChungTu) ? "" : o.SoChungTu,
+
                                   o.TrangThai,
-                                  o.MauSo,
-                                  o.KyHieu,
-                                  o.SoChungTu,
                                   Id = o.Id
                               };
 
@@ -139,15 +141,17 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                         SoThuNhapDuocNhan = o.SoThuNhapDuocNhan,
                         KhoanDongGop = o.KhoanDongGop,
                         Email = o.Email,
+                        TrangThai = o.TrangThai,
+                        Id = o.Id,
+
+                        // được nhập sau
                         ThoiGianNhap = o.ThoiGianNhap,
                         ThoiGianDuyet = o.ThoiGianDuyet,
                         UserNhap = o.UserNhap,
                         UserDuyet = o.UserDuyet,
-                        TrangThai = o.TrangThai,
                         MauSo = o.MauSo,
                         KyHieu = o.KyHieu,
                         SoChungTu = o.SoChungTu,
-                        Id = o.Id,
                     }
                 };
 
@@ -159,6 +163,87 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                 results
             );
 
+        }
+
+        public async Task<PagedResultDto<GetChungTuKTTForViewDto>> GetByIdList(GetAllChungTuKTTsInput input)
+        {
+            var results = new List<GetChungTuKTTForViewDto>();
+            if (input.IdListFilter == null || input.IdListFilter.Count == 0)
+            {
+                return new PagedResultDto<GetChungTuKTTForViewDto>(0, results);
+            }
+
+            var filteredChungTuKTTs = _chungTuKTTRepository.GetAll().Where(x => input.IdListFilter.Contains(x.Id));
+
+            var pagedAndFilteredChungTuKTTs = filteredChungTuKTTs
+                .OrderBy("id desc")
+                .PageBy(input);
+
+            var chungTuKTTs = from o in pagedAndFilteredChungTuKTTs
+                              select new
+                              {
+                                  o.HoTen,
+                                  o.MaSoThue,
+                                  o.DiaChi,
+                                  o.QuocTich,
+                                  o.CuTru,
+                                  o.CCCD,
+                                  o.NoiCap,
+                                  o.NgayCap,
+                                  o.KhoanThuNhap,
+                                  o.BaoHiemBatBuoc,
+                                  o.ThoiDiemTraThuNhapThang,
+                                  o.ThoiDiemTraThuNhapNam,
+                                  o.TongThuNhapChiuThue,
+                                  o.TongThuNhapTinhThue,
+                                  o.SoThueTNCNDaKhauTru,
+                                  o.SoThuNhapDuocNhan,
+                                  o.KhoanDongGop,
+                                  o.Email,                                  
+                                  o.TrangThai,                                  
+                                  Id = o.Id
+                              };
+
+            var totalCount = await filteredChungTuKTTs.CountAsync();
+
+            var dbList = await chungTuKTTs.ToListAsync();
+
+            foreach (var o in dbList)
+            {
+                var res = new GetChungTuKTTForViewDto()
+                {
+                    ChungTuKTT = new ChungTuKTTDto
+                    {
+                        HoTen = o.HoTen,
+                        MaSoThue = o.MaSoThue,
+                        DiaChi = o.DiaChi,
+                        QuocTich = o.QuocTich,
+                        CuTru = o.CuTru,
+                        CCCD = o.CCCD,
+                        NoiCap = o.NoiCap,
+                        NgayCap = o.NgayCap,
+                        KhoanThuNhap = o.KhoanThuNhap,
+                        BaoHiemBatBuoc = o.BaoHiemBatBuoc,
+                        ThoiDiemTraThuNhapThang = o.ThoiDiemTraThuNhapThang,
+                        ThoiDiemTraThuNhapNam = o.ThoiDiemTraThuNhapNam,
+                        TongThuNhapChiuThue = o.TongThuNhapChiuThue,
+                        TongThuNhapTinhThue = o.TongThuNhapTinhThue,
+                        SoThueTNCNDaKhauTru = o.SoThueTNCNDaKhauTru,
+                        SoThuNhapDuocNhan = o.SoThuNhapDuocNhan,
+                        KhoanDongGop = o.KhoanDongGop,
+                        Email = o.Email,                        
+                        TrangThai = o.TrangThai,                        
+                        Id = o.Id,
+                    }
+                };
+
+                results.Add(res);
+            }
+
+            return new PagedResultDto<GetChungTuKTTForViewDto>(
+                totalCount,
+                results
+            );
         }
 
         public async Task<GetChungTuKTTForViewDto> GetChungTuKTTForView(long id)
@@ -296,9 +381,10 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
             return _chungTuKTTsExcelExporter.ExportToFile(chungTuKTTListDtos);
         }
 
-        public async Task<PagedResultDto<GetChungTuKTTForViewDto>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch)
+        public async Task<List<long>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch)
         {
-            List<GetChungTuKTTForViewDto> results = new List<GetChungTuKTTForViewDto>();
+            List<long> importedIdList = new List<long>();
+
             if (ChungTuBatch?.Length > 0)
             {
                 var stream = ChungTuBatch.OpenReadStream();
@@ -319,8 +405,8 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                 var quocTich = worksheet.Cells[row, index++].Value?.ToString();
                                 var cuTru = worksheet.Cells[row, index++].Value?.ToString();
                                 var cccd = worksheet.Cells[row, index++].Value?.ToString();
-                                var ngayCap = worksheet.Cells[row, index++].Value?.ToString();
                                 var noiCap = worksheet.Cells[row, index++].Value?.ToString();
+                                var ngayCap = worksheet.Cells[row, index++].Value?.ToString();
                                 var khoanThuNhap = worksheet.Cells[row, index++].Value?.ToString();
                                 var baoHiemBatBuoc = worksheet.Cells[row, index++].Value?.ToString();
                                 var thoiDiemTraThuNhapThang = worksheet.Cells[row, index++].Value?.ToString();
@@ -345,50 +431,39 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                 Decimal.TryParse(soThuNhapDuocNhan, out soThuNhapDuocNhanDecimal);
                                 Decimal.TryParse(khoanDongGop, out khoanDongGopDecimal);
 
-                                GetChungTuKTTForViewDto chungTuTmp = new GetChungTuKTTForViewDto()
+                                CreateOrEditChungTuKTTDto createDtoTmp = new CreateOrEditChungTuKTTDto()
                                 {
-                                    ChungTuKTT = new ChungTuKTTDto()
-                                    {
-                                        //HoTen = hoTen,
-                                        //MaSoThue = maSoThue,
-                                        //DiaChi = diaChi,
-                                        //QuocTich = quocTich,
-                                        //CuTru = cuTru,
-                                        //CCCD = cccd,
-                                        //NoiCap = noiCap,
-                                        //NgayCap = // DateTime.ParseExact(ngayCap, "yyyy-MM-dd", CultureInfo.InvariantCulture),
-                                        //KhoanThuNhap = Decimal.Parse(khoanThuNhap),
-                                        //BaoHiemBatBuoc = baoHiemBatBuoc,
-                                        //ThoiDiemTraThuNhapThang = thoiDiemTraThuNhapThang,
-                                        //ThoiDiemTraThuNhapNam = thoiDiemTraThuNhapNam,
-                                        //TongThuNhapChiuThue = Decimal.Parse(tongThuNhapChiuThue),
-                                        //TongThuNhapTinhThue = Decimal.Parse(tongThuNhapTinhThue),
-                                        //SoThueTNCNDaKhauTru = Decimal.Parse(soThueTNCNDaKhauTru),
-                                        //SoThuNhapDuocNhan = Decimal.Parse(soThuNhapDuocNhan),
-                                        //KhoanDongGop = Decimal.Parse(khoanDongGop),
-                                        //Email = email
-                                        HoTen = hoTen,
-                                        MaSoThue = maSoThue,
-                                        DiaChi = diaChi,
-                                        QuocTich = quocTich,
-                                        CuTru = cuTru,
-                                        CCCD = cccd,
-                                        NoiCap = noiCap,
-                                        NgayCap = DateTime.Now,
-                                        KhoanThuNhap = khoanThuNhapDecimal,
-                                        BaoHiemBatBuoc = baoHiemBatBuoc,
-                                        ThoiDiemTraThuNhapThang = thoiDiemTraThuNhapThang,
-                                        ThoiDiemTraThuNhapNam = thoiDiemTraThuNhapNam,
-                                        TongThuNhapChiuThue = tongThuNhapChiuThueDecimal,
-                                        TongThuNhapTinhThue = tongThuNhapTinhThueDecimal,
-                                        SoThueTNCNDaKhauTru = soThueTNCNDaKhauTruDecimal,
-                                        SoThuNhapDuocNhan = soThuNhapDuocNhanDecimal,
-                                        KhoanDongGop = khoanDongGopDecimal,
-                                        Email = email
-                                    }
-                                };
+                                    HoTen = hoTen,
+                                    MaSoThue = maSoThue,
+                                    DiaChi = diaChi,
+                                    QuocTich = quocTich,
+                                    CuTru = cuTru,
+                                    CCCD = cccd,
+                                    NoiCap = noiCap,
+                                    //NgayCap = // DateTime.ParseExact(ngayCap, "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                                    NgayCap = DateTime.Now,
+                                    KhoanThuNhap = khoanThuNhapDecimal,
+                                    BaoHiemBatBuoc = baoHiemBatBuoc,
+                                    ThoiDiemTraThuNhapThang = thoiDiemTraThuNhapThang,
+                                    ThoiDiemTraThuNhapNam = thoiDiemTraThuNhapNam,
+                                    TongThuNhapChiuThue = tongThuNhapChiuThueDecimal,
+                                    TongThuNhapTinhThue = tongThuNhapTinhThueDecimal,
+                                    SoThueTNCNDaKhauTru = soThueTNCNDaKhauTruDecimal,
+                                    SoThuNhapDuocNhan = soThuNhapDuocNhanDecimal,
+                                    KhoanDongGop = khoanDongGopDecimal,
+                                    Email = email,
+                                    TrangThai = QludConsts.TrangThai.INIT,
 
-                                results.Add(chungTuTmp);
+                                    UserNhap = "",
+                                    UserDuyet = "",
+                                    MauSo = "",
+                                    KyHieu = "",
+                                    SoChungTu = "",
+                                };
+                                
+                                var chungTuKTT = ObjectMapper.Map<ChungTuKTT>(createDtoTmp);
+                                var newId = await _chungTuKTTRepository.InsertAndGetIdAsync(chungTuKTT);
+                                //importedIdList.Add(newId);
                             }
                             catch (Exception ex)
                             {
@@ -403,8 +478,9 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                 }
             }
 
-
-            return new PagedResultDto<GetChungTuKTTForViewDto>(results.Count, results);
+            importedIdList.Add(4);
+            importedIdList.Add(5);
+            return importedIdList;
         }
     }
 }
