@@ -36,22 +36,22 @@
         public const int MinEmailLength = 1;
         public const int MaxEmailLength = 40;
 
-        public const int MinUserNhapLength = 1;
+        public const int MinUserNhapLength = 0;
         public const int MaxUserNhapLength = 20;
 
-        public const int MinUserDuyetLength = 1;
+        public const int MinUserDuyetLength = 0;
         public const int MaxUserDuyetLength = 20;
 
         public const int MinTrangThaiLength = 1;
         public const int MaxTrangThaiLength = 2;
 
-        public const int MinMauSoLength = 1;
+        public const int MinMauSoLength = 0;
         public const int MaxMauSoLength = 10;
 
-        public const int MinKyHieuLength = 1;
+        public const int MinKyHieuLength = 0;
         public const int MaxKyHieuLength = 10;
 
-        public const int MinSoChungTuLength = 1;
+        public const int MinSoChungTuLength = 0;
         public const int MaxSoChungTuLength = 10;
 
     }

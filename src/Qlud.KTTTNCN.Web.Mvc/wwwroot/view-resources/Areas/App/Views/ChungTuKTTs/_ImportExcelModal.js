@@ -13,14 +13,14 @@
             'delete': abp.auth.hasPermission('Pages.ChungTuKTTs.Delete')
         };
 
-        var _createOrEditModal = new app.ModalManager({
+        var _importCreateOrEditModal = new app.ModalManager({
             viewUrl: abp.appPath + 'App/ChungTuKTTs/CreateOrEditModal',
-            scriptUrl: abp.appPath + 'view-resources/Areas/App/Views/ChungTuKTTs/_CreateOrEditModal.js',
+            scriptUrl: abp.appPath + 'view-resources/Areas/App/Views/ChungTuKTTs/_ImportCreateOrEditModal.js',
             modalClass: 'CreateOrEditChungTuKTTModal'
         });
 
 
-        var _viewChungTuKTTModal = new app.ModalManager({
+        var _importViewChungTuKTTModal = new app.ModalManager({
             viewUrl: abp.appPath + 'App/ChungTuKTTs/ViewchungTuKTTModal',
             modalClass: 'ViewChungTuKTTModal'
         });
@@ -78,7 +78,7 @@
                                 text: app.localize('View'),
                                 iconStyle: 'far fa-eye mr-2',
                                 action: function (data) {
-                                    _viewChungTuKTTModal.open({ id: data.record.chungTuKTT.id });
+                                    _importViewChungTuKTTModal.open({ id: data.record.chungTuKTT.id });
                                 }
                             },
                             {
@@ -88,7 +88,7 @@
                                     return _permissions.edit;
                                 },
                                 action: function (data) {
-                                    _createOrEditModal.open({ id: data.record.chungTuKTT.id });
+                                    _importCreateOrEditModal.open({ id: data.record.chungTuKTT.id });
                                 }
                             },
                             {
@@ -211,7 +211,37 @@
             dataTable.ajax.reload();
         }
 
+        abp.event.on('app.importCreateOrEditChungTuKTTModalSaved', function () {
+            reloadImportChungTuKTTs();
+        });
+
         $('#ImportChungTuKTT_ChooseFileButton').click(function () {
+            // set choose file button as hidden -> show the reimport
+            document.getElementById('ImportChungTuKTT_ChooseFileButton').style.display = 'none';
+            document.getElementById('ImportChungTuKTT_ReimportChooseFileButton').style.display = 'block';
+            document.getElementById('ImportChungTuKTT_ChungTuBatch').disabled = true;
+
+            // check valid input file
+            var fileName = document.getElementById('ImportChungTuKTT_ChungTuBatch').value;
+            // check has input
+            if (!fileName) {
+                abp.message.error('Chưa chọn file import');
+                document.getElementById('ImportChungTuKTT_ChooseFileButton').style.display = 'block';
+                document.getElementById('ImportChungTuKTT_ReimportChooseFileButton').style.display = 'none';
+                document.getElementById('ImportChungTuKTT_ChungTuBatch').disabled = false;
+                return;
+            }
+            // check valid xls xlsx (file extension)
+            var fileExtension = fileName.split('.').pop();
+            console.log('fileExtension: ', fileExtension);
+            if (fileExtension != 'xls' && fileExtension != 'xlsx') {
+                abp.message.error('Chưa chọn đúng file extension: xls, xlsx');
+                document.getElementById('ImportChungTuKTT_ChooseFileButton').style.display = 'block';
+                document.getElementById('ImportChungTuKTT_ReimportChooseFileButton').style.display = 'none';
+                document.getElementById('ImportChungTuKTT_ChungTuBatch').disabled = false;
+                return;
+            }
+
             //Set the URL.
             var url = $("#ImportChungTuKTTsFromExcelForm").attr("action");
             //Add the Field values to FormData object.
@@ -225,11 +255,20 @@
                 processData: false,
                 contentType: false
             }).done(async function (response) {
-                // import multi time
-                idList.push.apply(idList, response.result);
-                // reload the list
-                reloadImportChungTuKTTs();
+                if (response.result.length > 0) {
+                    // import multi time
+                    idList.push.apply(idList, response.result);
+                    // reload the list
+                    reloadImportChungTuKTTs();
+                }
             })
+        });
+
+        $('#ImportChungTuKTT_ReimportChooseFileButton').click(function () {
+            document.getElementById('ImportChungTuKTT_ChooseFileButton').style.display = 'block';
+            document.getElementById('ImportChungTuKTT_ReimportChooseFileButton').style.display = 'none';
+            document.getElementById('ImportChungTuKTT_ChungTuBatch').disabled = false;
+            document.getElementById('ImportChungTuKTT_ChungTuBatch').value = '';
         });
 
         function deleteChungTuKTT(chungTuKTT) {
@@ -263,7 +302,7 @@
             ).done(function () {
                 abp.notify.info(app.localize('SavedSuccessfully'));
                 _modalManager.close();
-                abp.event.trigger('app.createOrEditChungTuKTTModalSaved');
+                abp.event.trigger('app.importCreateOrEditChungTuKTTModalSaved');
             }).always(function () {
                 _modalManager.setBusy(false);
             });

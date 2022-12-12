@@ -477,10 +477,10 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                 {
                     throw;
                 }
+                importedIdList.Add(4);
+                importedIdList.Add(5);
             }
 
-            importedIdList.Add(4);
-            importedIdList.Add(5);
             return importedIdList;
         }
     }
