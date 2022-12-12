@@ -41,7 +41,7 @@
 
         var idList = [];
         var index = 0;
-        var dataTable = _$importedChungTuKTTsTable.DataTable({
+        var dataTable = _$importedChungTuKTTsTable.DataTable({            
             paging: true,
             serverSide: true,
             processing: true,
@@ -233,7 +233,6 @@
             }
             // check valid xls xlsx (file extension)
             var fileExtension = fileName.split('.').pop();
-            console.log('fileExtension: ', fileExtension);
             if (fileExtension != 'xls' && fileExtension != 'xlsx') {
                 abp.message.error('Chưa chọn đúng file extension: xls, xlsx');
                 document.getElementById('ImportChungTuKTT_ChooseFileButton').style.display = 'block';
@@ -241,6 +240,9 @@
                 document.getElementById('ImportChungTuKTT_ChungTuBatch').disabled = false;
                 return;
             }
+
+            // display the table
+            document.getElementById('ImportedChungTuKTTsTable').style.display = 'block';
 
             //Set the URL.
             var url = $("#ImportChungTuKTTsFromExcelForm").attr("action");
@@ -271,9 +273,7 @@
             document.getElementById('ImportChungTuKTT_ChungTuBatch').value = '';
         });
 
-        function deleteChungTuKTT(chungTuKTT) {
-            console.log(chungTuKTT);
-
+        function deleteChungTuKTT(chungTuKTT) {            
             abp.message.confirm(
                 '',
                 app.localize('AreYouSure'),

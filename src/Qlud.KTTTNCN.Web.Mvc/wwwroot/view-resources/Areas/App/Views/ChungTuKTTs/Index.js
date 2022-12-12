@@ -77,6 +77,7 @@
             return $selectedDate.endDate.format("YYYY-MM-DDT23:59:59Z");
         }
 
+        var index = 0;
         var dataTable = _$chungTuKTTsTable.DataTable({
             paging: true,
             serverSide: true,
@@ -126,16 +127,33 @@
             },
             columnDefs: [
                 {
-                    className: 'control responsive',
+                    className: 'dt-body-center control responsive',
+                    orderable: false,
+                    render: function () {
+                        return '<div></div>';
+                    },
+                    targets: index++
+                },
+                {
                     orderable: false,
                     render: function () {
                         return '';
                     },
-                    targets: 0
+                    targets: index++
+                },
+                {
+                    targets: index++,
+                    searchable: false,
+                    orderable: false,
+                    className: 'dt-body-center select-checkbox',
+                    'render': function (data, type, row) {
+                        //return '<input type="checkbox" value="' + data + '">';
+                        return '';
+                    }
                 },
                 {
                     width: 120,
-                    targets: 1,
+                    targets: index++,
                     data: null,
                     orderable: false,
                     autoWidth: false,
@@ -174,42 +192,42 @@
                     }
                 },
                 {
-                    targets: 2,
+                    targets: index++,
                     data: "chungTuKTT.hoTen",
                     name: "hoTen"
                 },
                 {
-                    targets: 3,
+                    targets: index++,
                     data: "chungTuKTT.maSoThue",
                     name: "maSoThue"
                 },
                 {
-                    targets: 4,
+                    targets: index++,
                     data: "chungTuKTT.diaChi",
                     name: "diaChi"
                 },
                 {
-                    targets: 5,
+                    targets: index++,
                     data: "chungTuKTT.quocTich",
                     name: "quocTich"
                 },
                 {
-                    targets: 6,
+                    targets: index++,
                     data: "chungTuKTT.cuTru",
                     name: "cuTru"
                 },
                 {
-                    targets: 7,
+                    targets: index++,
                     data: "chungTuKTT.cccd",
                     name: "cccd"
                 },
                 {
-                    targets: 8,
+                    targets: index++,
                     data: "chungTuKTT.noiCap",
                     name: "noiCap"
                 },
                 {
-                    targets: 9,
+                    targets: index++,
                     data: "chungTuKTT.ngayCap",
                     name: "ngayCap",
                     render: function (ngayCap) {
@@ -221,57 +239,57 @@
 
                 },
                 {
-                    targets: 10,
+                    targets: index++,
                     data: "chungTuKTT.khoanThuNhap",
                     name: "khoanThuNhap"
                 },
                 {
-                    targets: 11,
+                    targets: index++,
                     data: "chungTuKTT.baoHiemBatBuoc",
                     name: "baoHiemBatBuoc"
                 },
                 {
-                    targets: 12,
+                    targets: index++,
                     data: "chungTuKTT.thoiDiemTraThuNhapThang",
                     name: "thoiDiemTraThuNhapThang"
                 },
                 {
-                    targets: 13,
+                    targets: index++,
                     data: "chungTuKTT.thoiDiemTraThuNhapNam",
                     name: "thoiDiemTraThuNhapNam"
                 },
                 {
-                    targets: 14,
+                    targets: index++,
                     data: "chungTuKTT.tongThuNhapChiuThue",
                     name: "tongThuNhapChiuThue"
                 },
                 {
-                    targets: 15,
+                    targets: index++,
                     data: "chungTuKTT.tongThuNhapTinhThue",
                     name: "tongThuNhapTinhThue"
                 },
                 {
-                    targets: 16,
+                    targets: index++,
                     data: "chungTuKTT.soThueTNCNDaKhauTru",
                     name: "soThueTNCNDaKhauTru"
                 },
                 {
-                    targets: 17,
+                    targets: index++,
                     data: "chungTuKTT.soThuNhapDuocNhan",
                     name: "soThuNhapDuocNhan"
                 },
                 {
-                    targets: 18,
+                    targets: index++,
                     data: "chungTuKTT.khoanDongGop",
                     name: "khoanDongGop"
                 },
                 {
-                    targets: 19,
+                    targets: index++,
                     data: "chungTuKTT.email",
                     name: "email"
                 },
                 {
-                    targets: 20,
+                    targets: index++,
                     data: "chungTuKTT.thoiGianNhap",
                     name: "thoiGianNhap",
                     render: function (thoiGianNhap) {
@@ -283,7 +301,7 @@
 
                 },
                 {
-                    targets: 21,
+                    targets: index++,
                     data: "chungTuKTT.thoiGianDuyet",
                     name: "thoiGianDuyet",
                     render: function (thoiGianDuyet) {
@@ -295,36 +313,41 @@
 
                 },
                 {
-                    targets: 22,
+                    targets: index++,
                     data: "chungTuKTT.userNhap",
                     name: "userNhap"
                 },
                 {
-                    targets: 23,
+                    targets: index++,
                     data: "chungTuKTT.userDuyet",
                     name: "userDuyet"
                 },
                 {
-                    targets: 24,
+                    targets: index++,
                     data: "chungTuKTT.trangThai",
                     name: "trangThai"
                 },
                 {
-                    targets: 25,
+                    targets: index++,
                     data: "chungTuKTT.mauSo",
                     name: "mauSo"
                 },
                 {
-                    targets: 26,
+                    targets: index++,
                     data: "chungTuKTT.kyHieu",
                     name: "kyHieu"
                 },
                 {
-                    targets: 27,
+                    targets: index++,
                     data: "chungTuKTT.soChungTu",
                     name: "soChungTu"
                 }
-            ]
+            ],
+            select: {
+                style: 'multi',
+                selector: 'tr>td:nth-child(3)'
+            },
+            order: [[1, 'asc']]
         });
 
         function getChungTuKTTs() {
@@ -416,6 +439,20 @@
         abp.event.on('app.createOrEditChungTuKTTModalSaved', function () {
             getChungTuKTTs();
         });
+
+        $('#PendingBatchChungTuKTTButton').click(function (e) {
+            e.preventDefault();
+            var selectedItems = dataTable.rows('.selected').data();
+            console.log('selectedItems: ', selectedItems);
+            console.log('selectedItems[0]: ', selectedItems[0]);
+            console.log('selectedItems.length: ', selectedItems.length);
+            
+        })
+
+        $('#ApproveBatchChungTuKTTButton').click(function (e) {
+            e.preventDefault();
+            var selectedItems = dataTable.rows('.selected').data();
+        })
 
         $('#GetChungTuKTTsButton').click(function (e) {
             e.preventDefault();
