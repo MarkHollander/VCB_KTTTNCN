@@ -297,7 +297,8 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
         [AbpAuthorize(AppPermissions.Pages_ChungTuKTTs_Delete)]
         public async Task Delete(EntityDto<long> input)
         {
-            await _chungTuKTTRepository.DeleteAsync(input.Id);
+            var chungTuKTT = await _chungTuKTTRepository.FirstOrDefaultAsync((int)input.Id);
+            chungTuKTT.TrangThai = QludConsts.TrangThai.DELETED;
         }
 
         public async Task<FileDto> GetChungTuKTTsToExcel(GetAllChungTuKTTsForExcelInput input)

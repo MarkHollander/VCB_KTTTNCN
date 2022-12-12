@@ -13,6 +13,18 @@
             'delete': abp.auth.hasPermission('Pages.ChungTuKTTs.Delete')
         };
 
+        var _createOrEditModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'App/ChungTuKTTs/CreateOrEditModal',
+            scriptUrl: abp.appPath + 'view-resources/Areas/App/Views/ChungTuKTTs/_CreateOrEditModal.js',
+            modalClass: 'CreateOrEditChungTuKTTModal'
+        });
+
+
+        var _viewChungTuKTTModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'App/ChungTuKTTs/ViewchungTuKTTModal',
+            modalClass: 'ViewChungTuKTTModal'
+        });
+
         this.init = function (modalManager) {
             _modalManager = modalManager;
 
@@ -219,6 +231,25 @@
                 reloadImportChungTuKTTs();
             })
         });
+
+        function deleteChungTuKTT(chungTuKTT) {
+            console.log(chungTuKTT);
+
+            abp.message.confirm(
+                '',
+                app.localize('AreYouSure'),
+                function (isConfirmed) {
+                    if (isConfirmed) {
+                        _chungTuKTTsService.delete({
+                            id: chungTuKTT.id
+                        }).done(function () {
+                            reloadImportChungTuKTTs();
+                            abp.notify.success(app.localize('SuccessfullyDeleted'));
+                        });
+                    }
+                }
+            );
+        }
 
         this.save = function () {
             if (!_$chungTuKTTInformationForm.valid()) {
