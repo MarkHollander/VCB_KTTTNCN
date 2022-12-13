@@ -4,5 +4,6 @@
     {
         public ChungTuKTTDto ChungTuKTT { get; set; }
 
+        public string TrangThai { get; set; }
     }
 }

@@ -70,7 +70,8 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                         .WhereIf(!string.IsNullOrWhiteSpace(input.TrangThaiFilter), e => e.TrangThai == input.TrangThaiFilter)
                         .WhereIf(!string.IsNullOrWhiteSpace(input.MauSoFilter), e => e.MauSo == input.MauSoFilter)
                         .WhereIf(!string.IsNullOrWhiteSpace(input.KyHieuFilter), e => e.KyHieu == input.KyHieuFilter)
-                        .WhereIf(!string.IsNullOrWhiteSpace(input.SoChungTuFilter), e => e.SoChungTu == input.SoChungTuFilter);
+                        .WhereIf(!string.IsNullOrWhiteSpace(input.SoChungTuFilter), e => e.SoChungTu == input.SoChungTuFilter)
+                        .WhereIf(!string.IsNullOrWhiteSpace(input.BranchCodeFilter), e => e.BranchCode == input.BranchCodeFilter);
 
             var pagedAndFilteredChungTuKTTs = filteredChungTuKTTs
                 .OrderBy(input.Sorting ?? "id desc")
@@ -100,7 +101,8 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                   o.Email,
 
                                   o.ThoiGianNhap,
-                                  o.ThoiGianDuyet,                                  
+                                  o.ThoiGianDuyet,
+                                  o.BranchCode,
                                   UserNhap = string.IsNullOrEmpty(o.UserNhap) ? "" : o.UserNhap,
                                   UserDuyet = string.IsNullOrEmpty(o.UserDuyet) ? "" : o.UserDuyet,
                                   MauSo = string.IsNullOrEmpty(o.MauSo) ? "" : o.MauSo,
@@ -147,12 +149,15 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                         // được nhập sau
                         ThoiGianNhap = o.ThoiGianNhap,
                         ThoiGianDuyet = o.ThoiGianDuyet,
+                        BranchCode = o.BranchCode,
                         UserNhap = o.UserNhap,
                         UserDuyet = o.UserDuyet,
                         MauSo = o.MauSo,
                         KyHieu = o.KyHieu,
                         SoChungTu = o.SoChungTu,
-                    }
+                    },
+
+                    TrangThai = QludConsts.TrangThai.DisplayList[o.TrangThai]
                 };
 
                 results.Add(res);
@@ -199,8 +204,9 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                                   o.SoThueTNCNDaKhauTru,
                                   o.SoThuNhapDuocNhan,
                                   o.KhoanDongGop,
-                                  o.Email,                                  
-                                  o.TrangThai,                                  
+                                  o.Email,
+                                  o.BranchCode,
+                                  o.TrangThai,
                                   Id = o.Id
                               };
 
@@ -231,8 +237,9 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                         SoThueTNCNDaKhauTru = o.SoThueTNCNDaKhauTru,
                         SoThuNhapDuocNhan = o.SoThuNhapDuocNhan,
                         KhoanDongGop = o.KhoanDongGop,
-                        Email = o.Email,                        
-                        TrangThai = o.TrangThai,                        
+                        Email = o.Email,
+                        BranchCode = o.BranchCode,
+                        TrangThai = o.TrangThai,
                         Id = o.Id,
                     }
                 };

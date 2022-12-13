@@ -68,6 +68,9 @@ namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
         public string KyHieuFilter { get; set; }
 
         public string SoChungTuFilter { get; set; }
+
         public List<long> IdListFilter { get; set; }
+
+        public string BranchCodeFilter { get; set; }
     }
 }

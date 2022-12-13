@@ -34,6 +34,9 @@ namespace Qlud.KTTTNCN.Authorization
             chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Create, L("CreateNewChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
             chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Edit, L("EditChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
             chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Delete, L("DeleteChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
+            chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_View, L("ViewChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
+            chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Pending, L("PendingChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
+            chungTuKTTs.CreateChildPermission(AppPermissions.Pages_ChungTuKTTs_Approve, L("ApproveChungTuKTT"), multiTenancySides: MultiTenancySides.Host);
 
             var toChucTraThuNhaps = pages.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps, L("ToChucTraThuNhaps"), multiTenancySides: MultiTenancySides.Host);
             toChucTraThuNhaps.CreateChildPermission(AppPermissions.Pages_ToChucTraThuNhaps_Create, L("CreateNewToChucTraThuNhap"), multiTenancySides: MultiTenancySides.Host);

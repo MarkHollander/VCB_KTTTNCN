@@ -87,5 +87,6 @@ namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
         [StringLength(ChungTuKTTConsts.MaxSoChungTuLength, MinimumLength = ChungTuKTTConsts.MinSoChungTuLength)]
         public string SoChungTu { get; set; }
 
+        public string BranchCode { get; set; }
     }
 }

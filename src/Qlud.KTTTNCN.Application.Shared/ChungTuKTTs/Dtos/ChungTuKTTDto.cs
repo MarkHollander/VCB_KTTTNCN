@@ -57,5 +57,6 @@ namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
 
         public string SoChungTu { get; set; }
 
+        public string BranchCode { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.Extensions;
@@ -21,6 +22,15 @@ namespace Qlud.KTTTNCN.Authorization.Users
         public string SignInToken { get; set; }
 
         public string GoogleAuthenticatorKey { get; set; }
+
+        [StringLength(UserConsts.MaxBranchCodeLength, MinimumLength = UserConsts.MinBranchCodeLength)]
+        public string BranchCode { get; set; }
+
+        [StringLength(UserConsts.MaxDeptCodeLength, MinimumLength = UserConsts.MinDeptCodeLength)]
+        public string DeptCode { get; set; }
+
+        [StringLength(UserConsts.MaxMaCBLength, MinimumLength = UserConsts.MinMaCBLength)]
+        public string MaCB { get; set; }
 
         public List<UserOrganizationUnit> OrganizationUnits { get; set; }
 

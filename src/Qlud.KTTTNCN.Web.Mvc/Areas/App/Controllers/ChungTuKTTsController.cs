@@ -31,6 +31,8 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Controllers
                 FilterText = ""
             };
 
+            //ViewBag.TrangThaiDict = QludConsts.TrangThai.DisplayList;
+
             return View(model);
         }
 

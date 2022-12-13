@@ -1,8 +1,12 @@
 ﻿(function () {
-    $(function () {
+    $(async function () {
 
         var _$chungTuKTTsTable = $('#ChungTuKTTsTable');
         var _chungTuKTTsService = abp.services.app.chungTuKTTs;
+        var _utilsService = abp.services.app.utils;
+        var _sessionService = abp.services.app.session;
+        var statusDict;
+        var userInfo;
 
         var $selectedDate = {
             startDate: null,
@@ -40,7 +44,10 @@
         var _permissions = {
             create: abp.auth.hasPermission('Pages.ChungTuKTTs.Create'),
             edit: abp.auth.hasPermission('Pages.ChungTuKTTs.Edit'),
-            'delete': abp.auth.hasPermission('Pages.ChungTuKTTs.Delete')
+            'delete': abp.auth.hasPermission('Pages.ChungTuKTTs.Delete'),
+            view: abp.auth.hasPermission('Pages.ChungTuKTTs.View'),
+            pending: abp.auth.hasPermission('Pages.ChungTuKTTs.Pending'),
+            approve: abp.auth.hasPermission('Pages.ChungTuKTTs.Approve'),
         };
 
         var _createOrEditModal = new app.ModalManager({
@@ -49,12 +56,16 @@
             modalClass: 'CreateOrEditChungTuKTTModal'
         });
 
+        var _pendingOrApproveModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'AppAreaName/ChungTuKTTs/PendingOrApproveModal', // controller
+            scriptUrl: abp.appPath + 'view-resources/Areas/AppAreaName/Views/ChungTuKTTs/_PendingOrApproveModal.js',
+            modalClass: 'PendingOrApproveChungTuKTTModal'
+        });
 
         var _viewChungTuKTTModal = new app.ModalManager({
             viewUrl: abp.appPath + 'App/ChungTuKTTs/ViewchungTuKTTModal',
             modalClass: 'ViewChungTuKTTModal'
         });
-
 
         var _importChungTuKTTModal = new app.ModalManager({
             viewUrl: abp.appPath + 'App/ChungTuKTTs/ImportExcelModal',
@@ -62,6 +73,12 @@
             modalClass: 'CreateOrEditChungTuKTTModal'
         });
 
+        await initPage();
+        async function initPage() {
+            statusDict = await _utilsService.getStatusDict();
+            var loginInfo = await _sessionService.getCurrentLoginInformations();
+            userInfo = await _utilsService.getUserListDto(loginInfo.user.id);            
+        }
 
         var getDateFilter = function (element) {
             if ($selectedDate.startDate == null) {
@@ -165,6 +182,9 @@
                             {
                                 text: app.localize('View'),
                                 iconStyle: 'far fa-eye mr-2',
+                                visible: function () {
+                                    return _permissions.view;
+                                },
                                 action: function (data) {
                                     _viewChungTuKTTModal.open({ id: data.record.chungTuKTT.id });
                                 }
@@ -172,18 +192,59 @@
                             {
                                 text: app.localize('Edit'),
                                 iconStyle: 'far fa-edit mr-2',
-                                visible: function () {
-                                    return _permissions.edit;
+                                visible: function (data) {
+                                    var trangThai = data.record.chungTuKTT.trangThai;
+                                    var couldBeUpdatedTrangThai = trangThai == statusDict["INIT"] ||
+                                        trangThai == statusDict["SAVE_DRAFT"] ||
+                                        trangThai == statusDict["RETURNED"];
+
+                                    return _permissions.edit && couldBeUpdatedTrangThai;
                                 },
                                 action: function (data) {
                                     _createOrEditModal.open({ id: data.record.chungTuKTT.id });
                                 }
                             },
                             {
+                                text: app.localize('Pending'),
+                                visible: function (data) {
+                                    var trangThai = data.record.chungTuKTT.trangThai;
+                                    var userNhap = data.record.chungTuKTT.userNhap;
+
+                                    var couldBePendingTrangThai = trangThai == statusDict["SAVE_DRAFT"];
+
+                                    //return _permissions.pending && couldBePendingTrangThai && (userNhap === userInfo.id.toString());
+                                    return _permissions.pending && couldBePendingTrangThai;
+                                },
+                                action: function (data) {
+                                    _pendingOrApproveModal.open({ id: data.record.chungTuKTT.id });
+                                }
+                            },
+                            {
+                                text: app.localize('Approve'),
+                                visible: function (data) {
+                                    var trangThai = data.record.chungTuKTT.trangThai;
+                                    var chiNhanh = data.record.chungTuKTT.branchCode;
+
+                                    var couldBeApproveedTrangThai = trangThai == statusDict["PENDING"];
+                                    var couldBeUpdatedCN = chiNhanh === userInfo.branchCode.toString();
+                                    
+                                    return _permissions.approve && couldBeApproveedTrangThai;
+                                },
+                                action: function (data) {
+                                    _pendingOrApproveModal.open({ id: data.record.chungTuKTT.id });
+                                }
+                            },
+                            {
                                 text: app.localize('Delete'),
                                 iconStyle: 'far fa-trash-alt mr-2',
-                                visible: function () {
-                                    return _permissions.delete;
+                                visible: function (data) {
+                                    console.log(data);
+                                    var trangThai = data.record.chungTuKTT.trangThai;
+                                    var userNhap = data.record.chungTuKTT.userNhap;
+
+                                    var couldBeDeletedTrangThai = trangThai == statusDict["INIT"] || trangThai == statusDict["SAVE_DRAFT"];
+
+                                    return _permissions.delete && couldBeDeletedTrangThai; // && (userNhap === userInfo.id.toString());;
                                 },
                                 action: function (data) {
                                     deleteChungTuKTT(data.record.chungTuKTT);
@@ -324,11 +385,6 @@
                 },
                 {
                     targets: index++,
-                    data: "chungTuKTT.trangThai",
-                    name: "trangThai"
-                },
-                {
-                    targets: index++,
                     data: "chungTuKTT.mauSo",
                     name: "mauSo"
                 },
@@ -341,7 +397,17 @@
                     targets: index++,
                     data: "chungTuKTT.soChungTu",
                     name: "soChungTu"
-                }
+                },
+                {
+                    targets: index++,
+                    data: "chungTuKTT.branchCode",
+                    name: "branchCode"
+                },
+                {
+                    targets: index++,
+                    data: "trangThai",
+                    name: "trangThai"
+                },
             ],
             select: {
                 style: 'multi',

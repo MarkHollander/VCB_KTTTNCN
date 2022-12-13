@@ -10,6 +10,9 @@
         public const string Pages_ChungTuKTTs_Create = "Pages.ChungTuKTTs.Create";
         public const string Pages_ChungTuKTTs_Edit = "Pages.ChungTuKTTs.Edit";
         public const string Pages_ChungTuKTTs_Delete = "Pages.ChungTuKTTs.Delete";
+        public const string Pages_ChungTuKTTs_View = "Pages.ChungTuKTTs.View";
+        public const string Pages_ChungTuKTTs_Pending = "Pages.ChungTuKTTs.Pending";
+        public const string Pages_ChungTuKTTs_Approve = "Pages.ChungTuKTTs.Approve";
 
         public const string Pages_ToChucTraThuNhaps = "Pages.ToChucTraThuNhaps";
         public const string Pages_ToChucTraThuNhaps_Create = "Pages.ToChucTraThuNhaps.Create";

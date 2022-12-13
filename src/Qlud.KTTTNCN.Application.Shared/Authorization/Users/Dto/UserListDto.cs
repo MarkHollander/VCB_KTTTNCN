@@ -15,6 +15,16 @@ namespace Qlud.KTTTNCN.Authorization.Users.Dto
 
         public string UserName { get; set; }
 
+        public string BranchCode { get; set; }
+
+        public string DeptCode { get; set; }
+
+        public string BranchName { get; set; }
+
+        public string DeptName { get; set; }
+
+        public string MaCB { get; set; }
+
         public string EmailAddress { get; set; }
         
         public DateTime? LockoutEndDateUtc { get; set; }
