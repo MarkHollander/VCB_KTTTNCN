@@ -26,5 +26,7 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
         Task<FileDto> GetChungTuKTTsToExcel(GetAllChungTuKTTsForExcelInput input);
 
         Task<List<long>> ImportChungTuKTTsFromExcel(IFormFile ChungTuBatch);
+
+        Task<PagedResultDto<BaoCaoQuanLyChungTuDto>> GetChungTu(GetChungTuInput input);
     }
 }

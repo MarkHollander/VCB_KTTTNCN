@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.Authorization;
+using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Abp.Linq.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -489,6 +490,60 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
             }
 
             return importedIdList;
+        }
+
+        public async Task<PagedResultDto<BaoCaoQuanLyChungTuDto>> GetChungTu(GetChungTuInput input)
+        {
+            var filteredChungTuKTTs = _chungTuKTTRepository.GetAll()
+                .WhereIf(!string.IsNullOrWhiteSpace(input.SoChungTu), x => String.Compare(x.SoChungTu, input.SoChungTu, StringComparison.OrdinalIgnoreCase) != 0)
+                .WhereIf(!string.IsNullOrWhiteSpace(input.MaSoThue), x => String.Compare(x.MaSoThue, input.MaSoThue, StringComparison.OrdinalIgnoreCase) != 0)
+                .WhereIf(!string.IsNullOrWhiteSpace(input.HoVaTen), x => String.Compare(x.HoTen, input.HoVaTen, StringComparison.OrdinalIgnoreCase) != 0)
+                .WhereIf(!string.IsNullOrWhiteSpace(input.Status), x => String.Compare(x.TrangThai, input.Status, StringComparison.OrdinalIgnoreCase) != 0)
+                .WhereIf(input.NgayLap!= null, x => x.ThoiGianNhap == input.NgayLap)
+                .WhereIf(input.NgayDuyet != null, x => x.ThoiGianDuyet == input.NgayDuyet)
+                ;
+            var pagedAndFilteredChungTuKTTs = filteredChungTuKTTs
+                .OrderBy("id desc");
+
+            var chungTuKTTs = from o in pagedAndFilteredChungTuKTTs
+                              select new
+                              {
+
+                                  o.HoTen,
+                                  o.MaSoThue,
+                                  o.DiaChi,
+                                  o.QuocTich,
+                                  o.CuTru,
+                                  o.CCCD,
+                                  o.NoiCap,
+                                  o.NgayCap,
+                                  o.KhoanThuNhap,
+                                  o.BaoHiemBatBuoc,
+                                  o.ThoiDiemTraThuNhapThang,
+                                  o.ThoiDiemTraThuNhapNam,
+                                  o.TongThuNhapChiuThue,
+                                  o.TongThuNhapTinhThue,
+                                  o.SoThueTNCNDaKhauTru,
+                                  o.SoThuNhapDuocNhan,
+                                  o.KhoanDongGop,
+                                  o.Email,
+
+                                  o.ThoiGianNhap,
+                                  o.ThoiGianDuyet,
+                                  o.BranchCode,
+                                  UserNhap = string.IsNullOrEmpty(o.UserNhap) ? "" : o.UserNhap,
+                                  UserDuyet = string.IsNullOrEmpty(o.UserDuyet) ? "" : o.UserDuyet,
+                                  MauSo = string.IsNullOrEmpty(o.MauSo) ? "" : o.MauSo,
+                                  KyHieu = string.IsNullOrEmpty(o.KyHieu) ? "" : o.KyHieu,
+                                  SoChungTu = string.IsNullOrEmpty(o.SoChungTu) ? "" : o.SoChungTu,
+
+                                  o.TrangThai,
+                                  Id = o.Id
+                              };
+
+            var totalCount = await filteredChungTuKTTs.CountAsync();
+
+            var dbList = await chungTuKTTs.ToListAsync();
         }
     }
 }
