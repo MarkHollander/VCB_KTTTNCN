@@ -1,0 +1,18 @@
+{
+  "name": "khautruthuetncn",
+  "version": "1.0.0",
+  "description": "* Start from here: https://www.aspnetzero.com/Documents/Development-Guide-Core\r * Want to port your existing MVC 5.x application? See this post: http://volosoft.com/migrating-from-asp-net-mvc-5x-to-asp-net-core/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://10.1.50.236:8080/scm/repo/git/KhauTruThueTNCN"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
+}

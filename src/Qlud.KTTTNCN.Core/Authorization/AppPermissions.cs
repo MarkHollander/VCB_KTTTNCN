@@ -19,6 +19,11 @@
         public const string Pages_ToChucTraThuNhaps_Edit = "Pages.ToChucTraThuNhaps.Edit";
         public const string Pages_ToChucTraThuNhaps_Delete = "Pages.ToChucTraThuNhaps.Delete";
 
+        public const string Pages_BaoCaoQuanLyChungTus = "Pages.BaoCaoQuanLyChungTus";
+        public const string Pages_BaoCaoQuanLyChungTus_Create = "Pages.BaoCaoQuanLyChungTus.Create";
+        public const string Pages_BaoCaoQuanLyChungTus_Edit = "Pages.BaoCaoQuanLyChungTus.Edit";
+        public const string Pages_BaoCaoQuanLyChungTus_Delete = "Pages.BaoCaoQuanLyChungTus.Delete";
+
         //COMMON PERMISSIONS (FOR BOTH OF TENANTS AND HOST)
 
         public const string Pages = "Pages";

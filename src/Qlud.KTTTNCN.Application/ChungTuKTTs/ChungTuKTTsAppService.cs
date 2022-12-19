@@ -506,44 +506,34 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
                 .OrderBy("id desc");
 
             var chungTuKTTs = from o in pagedAndFilteredChungTuKTTs
-                              select new
+                              select new BaoCaoQuanLyChungTuDto()
                               {
 
-                                  o.HoTen,
-                                  o.MaSoThue,
-                                  o.DiaChi,
-                                  o.QuocTich,
-                                  o.CuTru,
-                                  o.CCCD,
-                                  o.NoiCap,
-                                  o.NgayCap,
-                                  o.KhoanThuNhap,
-                                  o.BaoHiemBatBuoc,
-                                  o.ThoiDiemTraThuNhapThang,
-                                  o.ThoiDiemTraThuNhapNam,
-                                  o.TongThuNhapChiuThue,
-                                  o.TongThuNhapTinhThue,
-                                  o.SoThueTNCNDaKhauTru,
-                                  o.SoThuNhapDuocNhan,
-                                  o.KhoanDongGop,
-                                  o.Email,
+                                  HoVaTen = o.HoTen,
+                                  MaSoThue = o.MaSoThue,
 
-                                  o.ThoiGianNhap,
-                                  o.ThoiGianDuyet,
-                                  o.BranchCode,
-                                  UserNhap = string.IsNullOrEmpty(o.UserNhap) ? "" : o.UserNhap,
-                                  UserDuyet = string.IsNullOrEmpty(o.UserDuyet) ? "" : o.UserDuyet,
+                                  Email = o.Email,
+
+                                  ThoiGianNhap = o.ThoiGianNhap,
+                                  ThoiGianDuyet = o.ThoiGianDuyet,
+                                  
                                   MauSo = string.IsNullOrEmpty(o.MauSo) ? "" : o.MauSo,
                                   KyHieu = string.IsNullOrEmpty(o.KyHieu) ? "" : o.KyHieu,
                                   SoChungTu = string.IsNullOrEmpty(o.SoChungTu) ? "" : o.SoChungTu,
 
-                                  o.TrangThai,
+                                  TrangThai = o.TrangThai,
                                   Id = o.Id
                               };
 
-            var totalCount = await filteredChungTuKTTs.CountAsync();
+            
 
-            var dbList = await chungTuKTTs.ToListAsync();
+            List<BaoCaoQuanLyChungTuDto> dbList = await chungTuKTTs.ToListAsync<BaoCaoQuanLyChungTuDto>();
+
+            int totalCount = dbList.Count();
+            return new PagedResultDto<BaoCaoQuanLyChungTuDto>(
+                totalCount,
+                dbList
+            );
         }
     }
 }

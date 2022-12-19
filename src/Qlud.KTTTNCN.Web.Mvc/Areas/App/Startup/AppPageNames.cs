@@ -24,6 +24,7 @@
         {
             public const string ChungTuKTTs = "ChungTuKTTs.ChungTuKTTs";
             public const string ToChucTraThuNhaps = "ToChucTraThuNhaps.ToChucTraThuNhaps";
+            public const string BaoCaoQuanLyChungTus = "BaoCaoQuanLyChungTus.BaoCaoQuanLyChungTus";
             public const string Tenants = "Tenants";
             public const string Editions = "Editions";
             public const string Maintenance = "Administration.Maintenance";

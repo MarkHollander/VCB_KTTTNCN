@@ -37,7 +37,16 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Startup
                         icon: "flaticon-more",
                         permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_ToChucTraThuNhaps)
                     )
-                ).AddItem(new MenuItemDefinition(
+                )
+                .AddItem(new MenuItemDefinition(
+                        AppPageNames.Host.ChungTuKTTs,
+                        L("BaoCaoQuanLyChungTus"),
+                        url: "App/BaoCaoQuanLyChungTus",
+                        icon: "flaticon-more",
+                        permissionDependency: new SimplePermissionDependency(AppPermissions.Pages_BaoCaoQuanLyChungTus)
+                    )
+                )
+                .AddItem(new MenuItemDefinition(
                         AppPageNames.Host.Tenants,
                         L("Tenants"),
                         url: "App/Tenants",
