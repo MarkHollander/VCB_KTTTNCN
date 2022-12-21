@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
+namespace Qlud.KTTTNCN.BaoCaoChungTus.Dtos
 {
     public class GetChungTuInput
     {

@@ -492,48 +492,6 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
             return importedIdList;
         }
 
-        public async Task<PagedResultDto<BaoCaoQuanLyChungTuDto>> GetChungTu(GetChungTuInput input)
-        {
-            var filteredChungTuKTTs = _chungTuKTTRepository.GetAll()
-                .WhereIf(!string.IsNullOrWhiteSpace(input.SoChungTu), x => String.Compare(x.SoChungTu, input.SoChungTu, StringComparison.OrdinalIgnoreCase) != 0)
-                .WhereIf(!string.IsNullOrWhiteSpace(input.MaSoThue), x => String.Compare(x.MaSoThue, input.MaSoThue, StringComparison.OrdinalIgnoreCase) != 0)
-                .WhereIf(!string.IsNullOrWhiteSpace(input.HoVaTen), x => String.Compare(x.HoTen, input.HoVaTen, StringComparison.OrdinalIgnoreCase) != 0)
-                .WhereIf(!string.IsNullOrWhiteSpace(input.Status), x => String.Compare(x.TrangThai, input.Status, StringComparison.OrdinalIgnoreCase) != 0)
-                .WhereIf(input.NgayLap!= null, x => x.ThoiGianNhap == input.NgayLap)
-                .WhereIf(input.NgayDuyet != null, x => x.ThoiGianDuyet == input.NgayDuyet)
-                ;
-            var pagedAndFilteredChungTuKTTs = filteredChungTuKTTs
-                .OrderBy("id desc");
-
-            var chungTuKTTs = from o in pagedAndFilteredChungTuKTTs
-                              select new BaoCaoQuanLyChungTuDto()
-                              {
-
-                                  HoVaTen = o.HoTen,
-                                  MaSoThue = o.MaSoThue,
-
-                                  Email = o.Email,
-
-                                  ThoiGianNhap = o.ThoiGianNhap,
-                                  ThoiGianDuyet = o.ThoiGianDuyet,
-                                  
-                                  MauSo = string.IsNullOrEmpty(o.MauSo) ? "" : o.MauSo,
-                                  KyHieu = string.IsNullOrEmpty(o.KyHieu) ? "" : o.KyHieu,
-                                  SoChungTu = string.IsNullOrEmpty(o.SoChungTu) ? "" : o.SoChungTu,
-
-                                  TrangThai = o.TrangThai,
-                                  Id = o.Id
-                              };
-
-            
-
-            List<BaoCaoQuanLyChungTuDto> dbList = await chungTuKTTs.ToListAsync<BaoCaoQuanLyChungTuDto>();
-
-            int totalCount = dbList.Count();
-            return new PagedResultDto<BaoCaoQuanLyChungTuDto>(
-                totalCount,
-                dbList
-            );
-        }
+        
     }
 }

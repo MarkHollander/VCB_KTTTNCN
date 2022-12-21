@@ -1,7 +1,8 @@
 ﻿using Abp.Application.Services.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Qlud.KTTTNCN.BaoCaoChungTus;
+using Qlud.KTTTNCN.BaoCaoChungTus.Dtos;
 using Qlud.KTTTNCN.ChungTuKTTs;
-using Qlud.KTTTNCN.ChungTuKTTs.Dtos;
 using Qlud.KTTTNCN.Web.Areas.App.Models.BaoCaoQuanLyChungTu;
 using Qlud.KTTTNCN.Web.Controllers;
 
@@ -9,11 +10,11 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Controllers
 {
     public class BaoCaoQuanLyChungTusController : KTTTNCNControllerBase
     {
-        private readonly IChungTuKTTsAppService _chungTuKTTsAppService;
+        private readonly IBaoCaoChungTusAppService _baocaoChungTusAppService;
 
-        public BaoCaoQuanLyChungTusController(IChungTuKTTsAppService chungTuKTTsAppService)
+        public BaoCaoQuanLyChungTusController(IBaoCaoChungTusAppService baocaoChungTusAppService)
         {
-            _chungTuKTTsAppService = chungTuKTTsAppService;
+            _baocaoChungTusAppService = baocaoChungTusAppService;
 
         }
         public IActionResult Index()

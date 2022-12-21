@@ -1,5 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
-using Qlud.KTTTNCN.ChungTuKTTs.Dtos;
+using Qlud.KTTTNCN.BaoCaoChungTus.Dtos;
 
 namespace Qlud.KTTTNCN.Web.Areas.App.Models.BaoCaoQuanLyChungTu
 {

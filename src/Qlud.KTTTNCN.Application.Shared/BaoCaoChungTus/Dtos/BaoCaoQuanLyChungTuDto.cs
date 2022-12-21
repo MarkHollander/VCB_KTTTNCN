@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Qlud.KTTTNCN.ChungTuKTTs.Dtos
+namespace Qlud.KTTTNCN.BaoCaoChungTus.Dtos
 {
-    public class BaoCaoQuanLyChungTuDto: EntityDto<long>
-    {           
+    public class BaoCaoQuanLyChungTuDto : EntityDto<long>
+    {
         public int SoThuTu { get; set; }
         public string MauSo { get; set; }
         public string KyHieu { get; set; }
