@@ -23,6 +23,7 @@
         public const string Pages_BaoCaoQuanLyChungTus_Create = "Pages.BaoCaoQuanLyChungTus.Create";
         public const string Pages_BaoCaoQuanLyChungTus_Edit = "Pages.BaoCaoQuanLyChungTus.Edit";
         public const string Pages_BaoCaoQuanLyChungTus_Delete = "Pages.BaoCaoQuanLyChungTus.Delete";
+        public const string Pages_BaoCaoQuanLyChungTus_View = "Pages.BaoCaoQuanLyChungTus.View";
 
         //COMMON PERMISSIONS (FOR BOTH OF TENANTS AND HOST)
 

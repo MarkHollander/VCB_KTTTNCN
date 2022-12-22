@@ -10,9 +10,13 @@ using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Qlud.KTTTNCN.Dto;
+using Abp.Authorization;
+using Qlud.KTTTNCN.Authorization;
 
 namespace Qlud.KTTTNCN.BaoCaoChungTus
 {
+    [AbpAuthorize(AppPermissions.Pages_BaoCaoQuanLyChungTus)]
     public class BaoCaoChungTusAppService: KTTTNCNAppServiceBase, IBaoCaoChungTusAppService
     {
         private readonly IRepository<ChungTuKTT, long> _baoCaoChungTuRepository;
@@ -22,6 +26,17 @@ namespace Qlud.KTTTNCN.BaoCaoChungTus
             _baoCaoChungTuRepository = baoCaoChungTuRepository;
             _baoCaoChungTusExcelExporter = baoCaoChungTusExcelExporter;
         }
+
+        public FileDto ExportBaoCaoToPDF(long chungTuId)
+        {
+            return _baoCaoChungTusExcelExporter.ExportToPDF(chungTuId);
+        }
+
+        public FileDto ExportBaoCaoToXML(long chungTuId)
+        {
+            return _baoCaoChungTusExcelExporter.ExportToXML(chungTuId);
+        }
+
         public async Task<PagedResultDto<BaoCaoQuanLyChungTuDto>> GetChungTu(GetChungTuInput input)
         {
             var filteredChungTuKTTs = _baoCaoChungTuRepository.GetAll()

@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Qlud.KTTTNCN.BaoCaoChungTus
 {
-    public class ChungTuExporter : KTTTNCNAppServiceBase, IBaoCaoChungTusExporter
+    public class BaoCaoChungTusExporter : KTTTNCNAppServiceBase, IBaoCaoChungTusExporter
     {
         public FileDto ExportToPDF(long chungTuId)
         {
-            return new FileDto();
+            throw new NotImplementedException();
         }
 
         public FileDto ExportToXML(long chungTuId)
         {
-            return new FileDto();
+            throw new NotImplementedException();
         }
     }
 }

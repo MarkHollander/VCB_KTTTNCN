@@ -782,5 +782,7 @@
     <text name="Green">Màu lục</text>
     <text name="Pink">Màu hồng</text>
     <text name="Yellow">Màu vàng</text>
+
+	<text name="BaoCaoQuanLyChungTuKhauTruThueTNCN">Báo cáo quản lý chứng từ khấu trừ thuế TNCN</text>
   </texts>
 </localizationDictionary>
