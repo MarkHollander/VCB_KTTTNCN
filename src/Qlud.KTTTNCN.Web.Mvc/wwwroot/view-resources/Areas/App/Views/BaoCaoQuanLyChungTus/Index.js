@@ -2,7 +2,7 @@
     $(async function () {
 
         var _$baoCaoQuanLyChungTusTable = $('#BaoCaoQuanLyChungTusTable');
-        var _chungTuKTTsService = abp.services.app.chungTuKTTs;
+        var _baoCaoQuanLyChungTusService = abp.services.app.chungTuKTTs;
         var _utilsService = abp.services.app.utils;
         var _sessionService = abp.services.app.session;
         var statusDict;
@@ -78,7 +78,7 @@
             serverSide: true,
             processing: true,
             listAction: {
-                ajaxFunction: _chungTuKTTsService.getAll,
+                ajaxFunction: _baoCaoQuanLyChungTusService.getAll,
                 inputFilter: function () {
                     return {
                         /*filter: $('#ChungTuKTTsTableFilter').val(),*/
@@ -375,7 +375,7 @@
                 app.localize('AreYouSure'),
                 function (isConfirmed) {
                     if (isConfirmed) {
-                        _chungTuKTTsService.delete({
+                        _baoCaoQuanLyChungTusService.delete({
                             id: chungTuKTT.id
                         }).done(function () {
                             getChungTuKTTs(true);
@@ -407,7 +407,7 @@
         });
 
         $('#ExportToExcelButton').click(function () {
-            _chungTuKTTsService
+            _baoCaoQuanLyChungTusService
                 .getChungTuKTTsToExcel({
                     filter: $('#ChungTuKTTsTableFilter').val(),
                     hoTenFilter: $('#HoTenFilterId').val(),

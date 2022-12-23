@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Abp.Application.Services.Dto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Qlud.KTTTNCN.BaoCaoChungTus.Dtos
 {
-    public class GetChungTuInput
+    public class GetChungTuInput: PagedAndSortedResultRequestDto
     {
         public string SoChungTu { get; set; }
         public string MaSoThue { get; set; }

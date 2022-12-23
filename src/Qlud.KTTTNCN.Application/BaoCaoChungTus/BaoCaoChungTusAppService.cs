@@ -49,32 +49,28 @@ namespace Qlud.KTTTNCN.BaoCaoChungTus
                 ;
             var pagedAndFilteredChungTuKTTs = filteredChungTuKTTs
                 .OrderBy("id desc")
-                ;
+                .PageBy(input);
 
             var chungTuKTTs = from o in pagedAndFilteredChungTuKTTs
                               select new BaoCaoQuanLyChungTuDto()
                               {
-
+                                  
                                   HoVaTen = o.HoTen,
                                   MaSoThue = o.MaSoThue,
-
                                   Email = o.Email,
-
                                   ThoiGianNhap = o.ThoiGianNhap,
                                   ThoiGianDuyet = o.ThoiGianDuyet,
-
                                   MauSo = string.IsNullOrEmpty(o.MauSo) ? "" : o.MauSo,
                                   KyHieu = string.IsNullOrEmpty(o.KyHieu) ? "" : o.KyHieu,
                                   SoChungTu = string.IsNullOrEmpty(o.SoChungTu) ? "" : o.SoChungTu,
-
-                                  TrangThai = o.TrangThai,
+                                  TrangThai = QludConsts.TrangThai.DisplayList[o.TrangThai],
                                   Id = o.Id
                               };
 
 
-
+            int i = 0;
             List<BaoCaoQuanLyChungTuDto> dbList = await chungTuKTTs.ToListAsync<BaoCaoQuanLyChungTuDto>();
-
+            dbList = dbList.Select(o => { o.SoThuTu = i++; return o; }).ToList();
             int totalCount = dbList.Count();
             return new PagedResultDto<BaoCaoQuanLyChungTuDto>(
                 totalCount,
