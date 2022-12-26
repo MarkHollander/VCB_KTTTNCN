@@ -13,5 +13,8 @@ namespace Qlud.KTTTNCN.BaoCaoChungTus.Dtos
         public string Status { get; set; }
         public DateTime? NgayLap { get; set; }
         public DateTime? NgayDuyet { get; set; }
+        public string TrangThai { get; set; }
+        public string MauSo { get; set; }
+        public string KyHieu { get; set; }
     }
 }

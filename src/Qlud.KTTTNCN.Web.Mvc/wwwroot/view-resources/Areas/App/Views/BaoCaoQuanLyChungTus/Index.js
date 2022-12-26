@@ -2,7 +2,7 @@
     $(async function () {
 
         var _$baoCaoQuanLyChungTusTable = $('#BaoCaoQuanLyChungTusTable');
-        var _baoCaoQuanLyChungTusService = abp.services.app.baoCaoQuanLyChungTus;
+        var _baoCaoQuanLyChungTusService = abp.services.app.baoCaoChungTus;
         var _utilsService = abp.services.app.utils;
         var _sessionService = abp.services.app.session;
         var statusDict;
@@ -15,7 +15,15 @@
 
         $('.date-picker').daterangepicker({
             singleDatePicker: true,
-        }, (start) => $selectedDate.startDate = start);
+            autoUpdateInput: false
+        }).on('apply.daterangepicker', function (ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY'));
+        }).on('cancel.daterangepicker', function (ev, picker) {
+            $(this).val("");
+            $selectedDate.startDate = null;
+        });
+
+
 
 
 
@@ -28,28 +36,7 @@
             approve: abp.auth.hasPermission('Pages.BaoCaoQuanLyChungTus.Approve'),
         };
 
-        var _createOrEditModal = new app.ModalManager({
-            viewUrl: abp.appPath + 'App/ChungTuKTTs/CreateOrEditModal',
-            scriptUrl: abp.appPath + 'view-resources/Areas/App/Views/ChungTuKTTs/_CreateOrEditModal.js',
-            modalClass: 'CreateOrEditChungTuKTTModal'
-        });
 
-        var _pendingOrApproveModal = new app.ModalManager({
-            viewUrl: abp.appPath + 'AppAreaName/ChungTuKTTs/PendingOrApproveModal', // controller
-            scriptUrl: abp.appPath + 'view-resources/Areas/AppAreaName/Views/ChungTuKTTs/_PendingOrApproveModal.js',
-            modalClass: 'PendingOrApproveChungTuKTTModal'
-        });
-
-        var _viewChungTuKTTModal = new app.ModalManager({
-            viewUrl: abp.appPath + 'App/ChungTuKTTs/ViewchungTuKTTModal',
-            modalClass: 'ViewChungTuKTTModal'
-        });
-
-        var _importChungTuKTTModal = new app.ModalManager({
-            viewUrl: abp.appPath + 'App/ChungTuKTTs/ImportExcelModal',
-            scriptUrl: abp.appPath + 'view-resources/Areas/App/Views/ChungTuKTTs/_ImportExcelModal.js',
-            modalClass: 'CreateOrEditChungTuKTTModal'
-        });
 
         await initPage();
         async function initPage() {
@@ -73,21 +60,22 @@
         }
 
         var index = 0;
+        console.log('JS-StartGetChungTu');
         var dataTable = _$baoCaoQuanLyChungTusTable.DataTable({
             paging: true,
             serverSide: true,
             processing: true,
             listAction: {
-                ajaxFunction: _baoCaoQuanLyChungTusService.GetChungTu,
+                ajaxFunction: _baoCaoQuanLyChungTusService.getChungTu,
                 inputFilter: function () {
                     return {
                         /*filter: $('#ChungTuKTTsTableFilter').val(),*/
-                        hoTenFilter: $('#HoTenFilterId').val(),
-                        maSoThueFilter: $('#MaSoThueFilterId').val(),
-                        trangThaiFilter: $('#TrangThaiFilterId').val(),
-                        mauSoFilter: $('#MauSoFilterId').val(),
-                        kyHieuFilter: $('#KyHieuFilterId').val(),
-                        soChungTuFilter: $('#SoChungTuFilterId').val()
+                        hoVaTen: $('#HoTenFilterId').val(),
+                        maSoThue: $('#MaSoThueFilterId').val(),
+                        trangThai: $('#TrangThaiFilterId').val(),
+                        ngayLap: getDateFilter($('#NgayLapFilterId').val()),
+                        ngayDuyet: getDateFilter($('#NgayDuyetFilterId').val()),
+                        soChungTu: $('#SoChungTuFilterId').val()
                     };
                 }
             },
@@ -112,49 +100,50 @@
                     searchable: false,
                     orderable: false,
                     className: 'dt-body-center d-none',
-                    'render': function (data, type, row) {
-                        return '<input type="hidden" value="' + data.id + '" id="ChungTuIdHidden"/>';
+                    render: function (data, type, row) {
+                        console.log('row-id = ' + row.id);
+                        return '<input type="hidden" value="' + row.id + '" id="ChungTuIdHidden"/>';
                         //return '';
                     }
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.SoThuTu",
-                    name: "hoTen"
+                    data: "soThuTu",
+                    name: "soThuTu"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.mauSo",
+                    data: "mauSo",
                     name: "mauSo"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.kyHieu",
+                    data: "kyHieu",
                     name: "kyHieu"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.soChungTu",
+                    data: "soChungTu",
                     name: "soChungTu"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.maSoThue",
+                    data: "maSoThue",
                     name: "maSoThue"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.HoVaTen",
+                    data: "hoVaTen",
                     name: "hoTen"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.email",
+                    data: "email",
                     name: "email"
                 },
                 {
                     targets: index++,
-                    data: "baoCaoQuanLyChungTuDto.trangThai",
+                    data: "trangThai",
                     name: "trangThai"
                 },
                 {
@@ -187,7 +176,7 @@
             },
             order: [[1, 'asc']]
         });
-
+        console.log('JS-EndGetChungTu');
 
 
         function getChungTuKTTs() {
@@ -196,22 +185,7 @@
 
 
 
-        function deleteChungTuKTT(chungTuKTT) {
-            abp.message.confirm(
-                '',
-                app.localize('AreYouSure'),
-                function (isConfirmed) {
-                    if (isConfirmed) {
-                        _baoCaoQuanLyChungTusService.delete({
-                            id: chungTuKTT.id
-                        }).done(function () {
-                            getChungTuKTTs(true);
-                            abp.notify.success(app.localize('SuccessfullyDeleted'));
-                        });
-                    }
-                }
-            );
-        }
+
 
         $('#ShowAdvancedFiltersSpan').click(function () {
             $('#ShowAdvancedFiltersSpan').hide();
@@ -240,26 +214,16 @@
                 });
         });
 
-        abp.event.on('app.createOrEditChungTuKTTModalSaved', function () {
-            getChungTuKTTs();
-        });
 
-        $('#PendingBatchChungTuKTTButton').click(function (e) {
-            e.preventDefault();
-            var selectedItems = dataTable.rows('.selected').data();
-            console.log('selectedItems: ', selectedItems);
-            console.log('selectedItems[0]: ', selectedItems[0]);
-            console.log('selectedItems.length: ', selectedItems.length);
-
-        })
-
-        $('#ApproveBatchChungTuKTTButton').click(function (e) {
-            e.preventDefault();
-            var selectedItems = dataTable.rows('.selected').data();
-        })
 
         $('#GetChungTuKTTsButton').click(function (e) {
             e.preventDefault();
+            console.log('Ho va ten: ' + $('#HoTenFilterId').val());
+            console.log('Ma so thue: ' + $('#MaSoThueFilterId').val());
+            console.log('Trang thai: ' + $('#TrangThaiFilterId').val());
+            console.log('Ngay lap: ' + getDateFilter($('#NgayLapFilterId').val()));
+            console.log('Ngay Duyet: ' + getDateFilter($('#NgayDuyetFilterId').val()));
+            console.log('So Chung Tu: ' + $('#SoChungTuFilterId').val());
             getChungTuKTTs();
         });
 

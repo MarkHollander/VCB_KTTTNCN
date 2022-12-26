@@ -27,19 +27,19 @@ ViewBag.CurrentPageName = AppPageNames.Host.BaoCaoQuanLyChungTus;
                     <div class="col-md-3">
                         <div class="my-3">
                             <label class="form-label" for="SoChungTuFilterId">@L("SoChungTu")</label>
-                            <input type="text" class="form-control" name="soChungTuFilter" id="SoChungTuFilterId">
+                            <input type="text" class="form-control" name="SoChungTuFilterId" id="SoChungTuFilterId">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="my-3">
                             <label class="form-label" for="MaSoThueFilterId">@L("MaSoThue")</label>
-                            <input type="text" class="form-control" name="maSoThueFilter" id="MaSoThueFilterId">
+                            <input type="text" class="form-control" name="MaSoThueFilterId" id="MaSoThueFilterId">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="my-3">
                             <label class="form-label" for="HoTenFilterId">@L("HoTen")</label>
-                            <input type="text" class="form-control" name="hoTenFilter" id="HoTenFilterId">
+                            <input type="text" class="form-control" name="HoTenFilterId" id="HoTenFilterId">
                         </div>
                     </div>
                     
@@ -47,22 +47,27 @@ ViewBag.CurrentPageName = AppPageNames.Host.BaoCaoQuanLyChungTus;
                     <div class="col-md-3">
                         <div class="my-3">
                             <label class="form-label" for="TrangThaiFilterId">@L("TrangThai")</label>
-                            <input type="text" class="form-control" name="trangThaiFilter" id="TrangThaiFilterId">
+                            <input type="text" class="form-control" name="TrangThaiFilterId" id="TrangThaiFilterId">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="my-3">
                             <label class="form-label" for="NgayLapFilterId">@L("NgayLap")</label>
-                            <input type="datetime" class="form-control date-picker" name="ngayLapFilter" id="NgayLapFilterId">
+                            <input type="datetime" class="form-control date-picker" name="NgayLapFilterId" id="NgayLapFilterId">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="my-3">
                             <label class="form-label" for="NgayDuyetFilterId">@L("NgayDuyet")</label>
-                            <input type="datetime" class="form-control date-picker" name="ngayDuyetFilter" id="NgayDuyetFilterId">
+                            <input type="datetime" class="form-control date-picker" name="NgayDuyetFilterId" id="NgayDuyetFilterId">
                         </div>
                     </div>
-                    
+                    <div class="col-md-3">
+                        <div class="my-3"> 
+                            <label class="form-label"></label>
+                            <button id="GetChungTuKTTsButton" class="btn btn-primary form-control" type="submit"><i class="flaticon-search-1"></i></button>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="row my-4">
@@ -75,7 +80,8 @@ ViewBag.CurrentPageName = AppPageNames.Host.BaoCaoQuanLyChungTus;
                     @*<table id="ChungTuKTTsTable" class="display table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">*@
                     <table id="BaoCaoQuanLyChungTusTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap cell-border">
                         <thead>
-                            <tr>                                
+                            <tr> 
+                                <th></th>
                                 <th>@L("SoThuTu")</th>
                                 <th>@L("MauSo")</th>
                                 <th>@L("KyHieu")</th>
