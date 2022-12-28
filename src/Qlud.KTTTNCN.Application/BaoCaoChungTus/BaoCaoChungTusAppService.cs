@@ -13,21 +13,23 @@ using Microsoft.EntityFrameworkCore;
 using Qlud.KTTTNCN.Dto;
 using Abp.Authorization;
 using Qlud.KTTTNCN.Authorization;
-
+using Qlud.KTTTNCN.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace Qlud.KTTTNCN.BaoCaoChungTus
 {
     [AbpAuthorize(AppPermissions.Pages_BaoCaoQuanLyChungTus)]
     public class BaoCaoChungTusAppService: KTTTNCNAppServiceBase, IBaoCaoChungTusAppService
     {
-        
-        private readonly IRepository<ChungTuKTT, long> _baoCaoChungTuRepository;
+
+        private readonly IConfigurationRoot _appConfiguration;
+        private readonly IRepository<ChungTuKTT, long> _chungTuRepository;
         private readonly IBaoCaoChungTusExporter _baoCaoChungTusExcelExporter;
-        public BaoCaoChungTusAppService(IRepository<ChungTuKTT, long> baoCaoChungTuRepository, IBaoCaoChungTusExporter baoCaoChungTusExcelExporter)
+        public BaoCaoChungTusAppService(IRepository<ChungTuKTT, long> chungTuRepository, IBaoCaoChungTusExporter baoCaoChungTusExcelExporter, IAppConfigurationAccessor appConfigurationAccessor)
         {
-            _baoCaoChungTuRepository = baoCaoChungTuRepository;
+            _chungTuRepository = chungTuRepository;
             _baoCaoChungTusExcelExporter = baoCaoChungTusExcelExporter;
-            
+            _appConfiguration = appConfigurationAccessor.Configuration;   
         }
 
         public FileDto ExportBaoCaoToPDF(long chungTuId)
@@ -44,8 +46,9 @@ namespace Qlud.KTTTNCN.BaoCaoChungTus
         {
             Logger.Info("BaoCaoChungTus - GetChungTu: Start");
             Logger.Info("BaoCaoChungTus - GetChungTu: input = " + JsonSerializer.Serialize(input));
+            Logger.Info("BaoCaoChungTus - GetChungTu: test = " + _appConfiguration["BaoCaoQuanLyChungTu:ChungTuTemplatePath"]);
             int i = 1;
-            var filteredChungTuKTTs = _baoCaoChungTuRepository.GetAll()
+            var filteredChungTuKTTs = _chungTuRepository.GetAll()
                 .WhereIf(!string.IsNullOrWhiteSpace(input.SoChungTu), x => string.Equals(x.SoChungTu, input.SoChungTu))
                 .WhereIf(!string.IsNullOrWhiteSpace(input.MaSoThue), x => String.Equals(x.MaSoThue, input.MaSoThue))
                 .WhereIf(!string.IsNullOrWhiteSpace(input.HoVaTen), x => string.Equals(x.HoTen, input.HoVaTen))

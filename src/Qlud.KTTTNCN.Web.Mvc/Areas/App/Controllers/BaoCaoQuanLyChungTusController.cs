@@ -23,6 +23,7 @@ namespace Qlud.KTTTNCN.Web.Areas.App.Controllers
         }
         public IActionResult Index()
         {
+            
             GetChungTuInput nFilter = new GetChungTuInput();
             PagedResultDto<BaoCaoQuanLyChungTuDto> nPageDto = new PagedResultDto<BaoCaoQuanLyChungTuDto>()
             { 
