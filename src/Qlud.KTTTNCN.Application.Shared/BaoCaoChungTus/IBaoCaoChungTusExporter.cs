@@ -5,12 +5,15 @@ using Qlud.KTTTNCN.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Qlud.KTTTNCN.BaoCaoChungTus
 {
     public interface IBaoCaoChungTusExporter: IApplicationService
     {
-        FileDto ExportToPDF(long chungTuId);
-        FileDto ExportToXML(long chungTuId);
+        Task<FileDto> ExportToPDF(long chungTuId);
+        Task<FileDto> ExportToXML(long chungTuId);
+        Task<FileDto> ExportToWord(long chungTuId);
+
     }
 }

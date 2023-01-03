@@ -9,12 +9,17 @@ namespace Qlud.KTTTNCN.BaoCaoChungTus
 {
     public class BaoCaoChungTusExporter : KTTTNCNAppServiceBase, IBaoCaoChungTusExporter
     {
-        public FileDto ExportToPDF(long chungTuId)
+        public Task<FileDto> ExportToPDF(long chungTuId)
         {
             throw new NotImplementedException();
         }
 
-        public FileDto ExportToXML(long chungTuId)
+        public Task<FileDto> ExportToWord(long chungTuId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FileDto> ExportToXML(long chungTuId)
         {
             throw new NotImplementedException();
         }

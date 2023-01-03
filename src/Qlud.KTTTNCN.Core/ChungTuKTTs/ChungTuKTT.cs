@@ -95,6 +95,8 @@ namespace Qlud.KTTTNCN.ChungTuKTTs
         [StringLength(ChungTuKTTConsts.MaxSoChungTuLength, MinimumLength = ChungTuKTTConsts.MinSoChungTuLength)]
         public virtual string SoChungTu { get; set; }
 
-        public virtual string BranchCode { get; set; }        
+        public virtual string BranchCode { get; set; }
+
+        public int ToChucId { get; set; }
     }
 }

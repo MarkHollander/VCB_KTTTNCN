@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Qlud.KTTTNCN.EntityFrameworkCore;
 
@@ -11,9 +12,10 @@ using Qlud.KTTTNCN.EntityFrameworkCore;
 namespace Qlud.KTTTNCN.Migrations
 {
     [DbContext(typeof(KTTTNCNDbContext))]
-    partial class KTTTNCNDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230103040630_Added_ChungTuKTTs_Table")]
+    partial class Added_ChungTuKTTs_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1886,9 +1888,6 @@ namespace Qlud.KTTTNCN.Migrations
 
                     b.Property<DateTime>("ThoiGianNhap")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("ToChucId")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("TongThuNhapChiuThue")
                         .HasColumnType("decimal(18,2)");
