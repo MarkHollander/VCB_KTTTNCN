@@ -32,12 +32,12 @@ namespace Qlud.KTTTNCN.BaoCaoChungTus
             _appConfiguration = appConfigurationAccessor.Configuration;   
         }
 
-        public FileDto ExportBaoCaoToPDF(long chungTuId)
+        public Task<FileDto> ExportBaoCaoToPDF(long chungTuId)
         {
             return _baoCaoChungTusExcelExporter.ExportToPDF(chungTuId);
         }
 
-        public FileDto ExportBaoCaoToXML(long chungTuId)
+        public Task<FileDto> ExportBaoCaoToXML(long chungTuId)
         {
             return _baoCaoChungTusExcelExporter.ExportToXML(chungTuId);
         }
